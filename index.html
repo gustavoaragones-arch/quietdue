@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Early Pregnancy Calculator | QuietDue</title>
+  <meta name="description" content="A privacy-first early pregnancy calculator. Runs entirely in your browser. Nothing is saved, tracked, or stored. Works offline.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header></header>
+
+  <main>
+    <section class="hero">
+      <h1>Private Early Pregnancy Calculator</h1>
+      <p class="tagline">Runs entirely in your browser. Nothing is saved.</p>
+    </section>
+
+    <section class="trust-block">
+      <p>Many pregnancy tools store your data by default.</p>
+      <p>QuietDue runs entirely in your browser.</p>
+      <p>Nothing is saved, tracked, or sent anywhere.</p>
+    </section>
+
+    <section class="calculator-section">
+      <form id="calculator-form" class="calculator-form">
+        <div class="form-group">
+          <label for="lmp-date">First day of your last menstrual period</label>
+          <input type="date" id="lmp-date" name="lmp-date" required aria-describedby="helper-text date-message">
+          <span id="helper-text" class="helper-text">Approximate dates are okay.</span>
+          <div id="date-message" class="date-message" role="status" aria-live="polite" hidden></div>
+        </div>
+        <button type="submit" class="btn btn-primary">See estimate</button>
+      </form>
+    </section>
+
+    <section id="results" class="results-section" hidden>
+      <h2>Your Estimate</h2>
+      <dl class="results-grid">
+        <dt>Estimated due date</dt>
+        <dd class="result-due-date">—</dd>
+        <dt>Current gestational week</dt>
+        <dd class="result-week">—</dd>
+        <dt>Confidence window</dt>
+        <dd class="result-confidence">—</dd>
+      </dl>
+      <h3>Early milestones</h3>
+      <ul class="milestones-placeholder">
+        <li>—</li>
+      </ul>
+      <div class="action-buttons">
+        <button type="button" class="btn btn-secondary" data-action="print" disabled>Print Timeline</button>
+        <button type="button" class="btn btn-secondary" data-action="ics" disabled>Add to Calendar (.ics)</button>
+      </div>
+    </section>
+
+    <section class="privacy-badge">
+      <h2>Privacy First</h2>
+      <ul>
+        <li>No accounts</li>
+        <li>No tracking</li>
+        <li>No cookies</li>
+        <li>No data storage</li>
+        <li>Works offline</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p class="disclaimer">This tool provides estimates for informational purposes only. It is not medical advice.</p>
+    <p class="copyright">© QuietDue</p>
+  </footer>
+  <script src="/assets/js/calculator.js" defer></script>
+</body>
+</html>
