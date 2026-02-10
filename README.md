@@ -43,6 +43,16 @@ Commit static files only. Use the default branch `main`.
 
 **Static hosting only.** No server logic. No environment variables. Cloudflare serves the files as-is.
 
+## Contact Form Setup
+
+The contact form uses [Formspree](https://formspree.io) to receive messages without a backend. To enable it:
+
+1. Sign up at [formspree.io](https://formspree.io)
+2. Create a new form and copy your form ID
+3. In `contact/index.html`, replace `YOUR_FORM_ID` in the form `action` with your form ID
+
+Until configured, the form will not submit. Users can still email directly at `contact@quietdue.com`.
+
 ## License
 
 © QuietDue
