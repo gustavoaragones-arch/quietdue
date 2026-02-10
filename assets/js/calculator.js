@@ -22,6 +22,7 @@
   const btnPrint = document.querySelector('[data-action="print"]');
   const btnIcs = document.querySelector('[data-action="ics"]');
   const dateMessage = document.getElementById("date-message");
+  const actionMessage = document.getElementById("action-message");
 
   // Kept in memory only; cleared when the page is refreshed or closed
   let currentEstimate = null;
@@ -120,6 +121,7 @@
 
     btnPrint.disabled = false;
     btnIcs.disabled = false;
+    clearActionMessage();
   }
 
   function showResults() {
@@ -179,8 +181,101 @@
     window.print();
   }
 
+  function clearActionMessage() {
+    if (!actionMessage) return;
+    actionMessage.textContent = "";
+    actionMessage.hidden = true;
+  }
+
+  function showActionMessage(text) {
+    if (!actionMessage) return;
+    actionMessage.textContent = text;
+    actionMessage.hidden = false;
+  }
+
+  function toICSDate(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + m + d;
+  }
+
+  function generateICS(estimate) {
+    const lmpDate = new Date(document.getElementById("lmp-date").value + "T12:00:00");
+    const dueDate = estimate.dueDate;
+    const week7Date = addDays(lmpDate, 42);
+    const week9Date = addDays(lmpDate, 56);
+
+    const stamp = "20200101T000000Z";
+
+    const events = [
+      {
+        uid: "quietdue-due-date@local",
+        start: toICSDate(dueDate),
+        end: toICSDate(addDays(dueDate, 1)),
+        summary: "Estimated due date",
+        description: "QuietDue estimate. For informational purposes only.",
+      },
+      {
+        uid: "quietdue-week7@local",
+        start: toICSDate(week7Date),
+        end: toICSDate(addDays(week7Date, 1)),
+        summary: "Estimated early ultrasound window start (week 7)",
+        description: "QuietDue estimate. For informational purposes only.",
+      },
+      {
+        uid: "quietdue-week9@local",
+        start: toICSDate(week9Date),
+        end: toICSDate(addDays(week9Date, 1)),
+        summary: "Estimated early ultrasound window end (week 9)",
+        description: "QuietDue estimate. For informational purposes only.",
+      },
+    ];
+
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//QuietDue//Calculator//EN",
+    ];
+
+    events.forEach(function (ev) {
+      lines.push(
+        "BEGIN:VEVENT",
+        "UID:" + ev.uid,
+        "DTSTAMP:" + stamp,
+        "DTSTART;VALUE=DATE:" + ev.start,
+        "DTEND;VALUE=DATE:" + ev.end,
+        "SUMMARY:" + ev.summary,
+        "DESCRIPTION:" + ev.description,
+        "END:VEVENT"
+      );
+    });
+
+    lines.push("END:VCALENDAR");
+    return lines.join("\r\n");
+  }
+
   function handleIcs() {
-    // TODO: Implement .ics calendar file generation and download
+    if (!currentEstimate) return;
+
+    clearActionMessage();
+
+    try {
+      const ics = generateICS(currentEstimate);
+      const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "quietdue-estimated-dates.ics";
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      showActionMessage("The calendar file could not be created. Please try again.");
+    }
   }
 
   form.addEventListener("submit", function (e) {

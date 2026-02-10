@@ -289,6 +289,33 @@ main {
   line-height: 2;
 }
 
+/* About these estimates */
+.disclaimer-block {
+  padding: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.disclaimer-block h2 {
+  margin: 0 0 var(--space-md);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.disclaimer-block p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.disclaimer-block p + p {
+  margin-top: var(--space-sm);
+}
+
 /* Footer */
 footer {
   padding: var(--space-2xl) var(--space-lg);
@@ -326,5 +353,104 @@ footer {
   .btn {
     width: auto;
     min-width: 10rem;
+  }
+}
+
+/* Print — early pregnancy timeline (single page, black/gray) */
+@media print {
+  @page {
+    margin: 1in;
+    size: auto;
+  }
+
+  body {
+    background: #fff;
+    color: #111;
+    font-size: 11pt;
+  }
+
+  header,
+  .hero,
+  .trust-block,
+  .calculator-section,
+  .privacy-badge,
+  .disclaimer-block,
+  .action-buttons,
+  .btn {
+    display: none !important;
+  }
+
+  .results-section {
+    display: block !important;
+    visibility: visible !important;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .results-section h2 {
+    font-size: 14pt;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    color: #111;
+  }
+
+  .results-section h3 {
+    font-size: 11pt;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+    color: #333;
+  }
+
+  .results-grid {
+    margin: 0 0 0.5rem;
+  }
+
+  .results-grid dt {
+    color: #444;
+    font-weight: 400;
+  }
+
+  .results-grid dd {
+    color: #111;
+    font-weight: 500;
+  }
+
+  .milestones-placeholder {
+    color: #333;
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .milestones-placeholder li {
+    margin-bottom: 0.2rem;
+    color: #333;
+  }
+
+  .milestones-placeholder strong {
+    color: #111;
+  }
+
+  footer {
+    margin-top: 1.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #999;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .disclaimer,
+  .copyright {
+    color: #666;
+    font-size: 9pt;
+  }
+
+  main {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
   }
 }
