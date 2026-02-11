@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Private Early Pregnancy Calculator | QuietDue</title>
-  <meta name="description" content="Privacy-first due date calculator. Runs in your browser. Nothing saved or tracked. Works offline.">
+  <title>Private Early Pregnancy Calculator — No Account Required | QuietDue</title>
+  <meta name="description" content="Early pregnancy calculator without account. Private, offline, nothing saved. Understand where you are—no tracking, no sign-up.">
   <link rel="canonical" href="https://quietdue.com/">
   <link rel="alternate" hreflang="en" href="https://quietdue.com/">
   <link rel="alternate" hreflang="x-default" href="https://quietdue.com/">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is QuietDue private?","acceptedAnswer":{"@type":"Answer","text":"Yes. QuietDue runs entirely in your browser. It does not create accounts, use trackers, store your inputs, or sync to the cloud. Closing the page erases everything."}},{"@type":"Question","name":"Does this calculator save my data?","acceptedAnswer":{"@type":"Answer","text":"No. Nothing is saved. Your dates and results stay on your device and are never sent to a server."}},{"@type":"Question","name":"How accurate are early due dates?","acceptedAnswer":{"@type":"Answer","text":"Early pregnancy dating is imprecise. Cycle length and ovulation timing vary. Ultrasound may change estimates. This tool provides an approximate window, not a definitive date."}},{"@type":"Question","name":"Can I use this without creating an account?","acceptedAnswer":{"@type":"Answer","text":"Yes. No account is required. You can use the calculator immediately without signing up or logging in."}},{"@type":"Question","name":"Does QuietDue work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once the page loads, the calculator runs entirely in your browser and works without an internet connection."}},{"@type":"Question","name":"Is this medical advice?","acceptedAnswer":{"@type":"Answer","text":"No. QuietDue provides estimates for informational purposes only. It does not replace advice from a healthcare provider."}}]}
+  </script>
 </head>
 <body>
   <header class="page-header">
+    <a href="/" class="site-brand">QuietDue.com</a>
     <nav aria-label="Main">
       <a href="/">Home</a>
       <a href="/learn/">Learn</a>
@@ -24,81 +28,111 @@
   </header>
 
   <main>
-    <section class="hero">
-      <h1>Private Early Pregnancy Calculator</h1>
-      <p class="tagline">Runs entirely in your browser. Nothing is saved.</p>
-    </section>
-
-    <section class="trust-block">
-      <p>Many pregnancy tools store your data by default.</p>
-      <p>QuietDue runs entirely in your browser.</p>
-      <p>Nothing is saved, tracked, or sent anywhere.</p>
-    </section>
-
-    <section class="calculator-section">
-      <form id="calculator-form" class="calculator-form">
-        <div class="form-group">
-          <label for="lmp-date">First day of your last menstrual period</label>
-          <input type="date" id="lmp-date" name="lmp-date" required aria-describedby="helper-text date-message">
-          <span id="helper-text" class="helper-text">Approximate dates are okay.</span>
-          <div id="date-message" class="date-message" role="status" aria-live="polite" hidden></div>
-        </div>
-        <button type="submit" class="btn btn-primary">See estimate</button>
-      </form>
-    </section>
-
-    <section id="results" class="results-section" hidden>
-      <h2>Your Estimate</h2>
-      <dl class="results-grid">
-        <dt>Estimated due date</dt>
-        <dd class="result-due-date">—</dd>
-        <dt>Current gestational week</dt>
-        <dd class="result-week">—</dd>
-        <dt>Confidence window</dt>
-        <dd class="result-confidence">—</dd>
-      </dl>
-      <h3>Early milestones</h3>
-      <ul class="milestones-placeholder">
-        <li>—</li>
-      </ul>
-      <div class="action-buttons">
-        <button type="button" class="btn btn-secondary" data-action="print" disabled>Print Timeline</button>
-        <button type="button" class="btn btn-secondary" data-action="ics" disabled>Add to Calendar (.ics)</button>
-        <div id="action-message" class="date-message" role="status" aria-live="polite" hidden></div>
+    <!-- 1. Hero — trust-first, privacy statement -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <h1 id="hero-heading">Quiet clarity for early pregnancy.</h1>
+      <p class="hero-tagline">Understand where you are — without accounts, tracking, or stored data.</p>
+      <p class="hero-positioning">QuietDue is a private, offline early-pregnancy calculator for people who want clarity without creating a data trail.</p>
+      <div class="hero-trust" role="complementary" aria-label="Privacy promise">
+        <p>Many pregnancy tools store your data by default. QuietDue runs entirely in your browser. Nothing is saved. Nothing is sent.</p>
       </div>
     </section>
 
-    <section class="privacy-badge">
-      <h2>Privacy First</h2>
-      <ul>
-        <li>No accounts</li>
-        <li>No tracking</li>
-        <li>No cookies</li>
-        <li>No data storage</li>
-        <li>Works offline</li>
+    <!-- 2. Explicit: what we do NOT collect -->
+    <section class="data-section" aria-labelledby="data-heading">
+      <h2 id="data-heading">What we don&rsquo;t collect</h2>
+      <p>We don&rsquo;t need anything from you to use QuietDue. Here&rsquo;s what we explicitly do not collect, store, or use:</p>
+      <ul class="data-list">
+        <li>No names, emails, or accounts</li>
+        <li>No dates you enter or results you see</li>
+        <li>No tracking, analytics, or cookies</li>
+        <li>No cloud sync or data sharing</li>
       </ul>
-      <p><a href="/privacy/">Read our privacy policy</a></p>
+      <p class="data-closing">Everything runs in your browser. Closing this page erases everything. We believe your information about your body should stay yours until you decide otherwise.</p>
     </section>
 
-    <section class="disclaimer-block">
-      <h2>About these estimates</h2>
-      <p>Early pregnancy dating is imprecise. Cycle length and ovulation timing vary from person to person.</p>
-      <p>Ultrasound may change estimates. Early scans often provide different dates than calculations based on the last menstrual period.</p>
-      <p>This tool is for informational purposes only. It does not replace advice from a healthcare provider. <a href="/learn/how-early-pregnancy-dating-works/">Learn how pregnancy dating works</a>.</p>
+    <!-- 3. Early pregnancy context — empathetic -->
+    <section class="context-section" aria-labelledby="context-heading">
+      <h2 id="context-heading">Early pregnancy is uncertain by nature</h2>
+      <p>Dates shift. Cycle length and ovulation timing vary from person to person. What we call &ldquo;week 6&rdquo; today might be recalculated after more information is available. That&rsquo;s normal.</p>
+      <p>Early ultrasounds often change estimates. Measurements in the first trimester can differ from dates based on your last period—and providers may adjust your due date accordingly. It doesn&rsquo;t mean anything went wrong; it just means early pregnancy dating is imprecise.</p>
+      <p>Week numbers can feel confusing. Different sources count differently. This tool gives you a best estimate so you can orient yourself—without pretending it&rsquo;s exact.</p>
+    </section>
+
+    <!-- 4. What this is / what this is not -->
+    <section class="identity-section" aria-labelledby="identity-heading">
+      <h2 id="identity-heading">What QuietDue is — and isn&rsquo;t</h2>
+      <div class="identity-grid">
+        <div>
+          <h3>Is</h3>
+          <ul>
+            <li>Private</li>
+            <li>Offline</li>
+            <li>Informational</li>
+            <li>Quiet</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Is not</h3>
+          <ul>
+            <li>A tracker</li>
+            <li>A social app</li>
+            <li>A data-collecting service</li>
+            <li>A replacement for medical care</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Calculator placeholder — no logic -->
+    <section class="calculator-placeholder" aria-label="Calculator coming soon">
+      <h2>Calculator</h2>
+      <p>The calculator will live entirely on this page and work offline. It will be available here shortly.</p>
+      <div class="calc-skeleton" aria-hidden="true">
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line skeleton-short"></div>
+      </div>
+    </section>
+
+    <!-- 6. Disclaimer -->
+    <section class="disclaimer-section" aria-labelledby="disclaimer-heading">
+      <h2 id="disclaimer-heading">About these estimates</h2>
+      <p>This tool is for informational purposes only. It does not replace advice from a healthcare provider. Early pregnancy dating is imprecise—cycle length and ovulation vary, and ultrasound may change estimates.</p>
+      <p><a href="/learn/how-early-pregnancy-dating-works/">Learn how pregnancy dating works</a></p>
+    </section>
+
+    <!-- 7. Static FAQ -->
+    <section class="faq-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently asked questions</h2>
+      <dl class="faq-list">
+        <dt>Is QuietDue private?</dt>
+        <dd>Yes. QuietDue runs entirely in your browser. It does not create accounts, use trackers, store your inputs, or sync to the cloud. Closing the page erases everything.</dd>
+        <dt>Does this calculator save my data?</dt>
+        <dd>No. Nothing is saved. Your dates and results stay on your device and are never sent to a server.</dd>
+        <dt>How accurate are early due dates?</dt>
+        <dd>Early pregnancy dating is imprecise. Cycle length and ovulation timing vary. Ultrasound may change estimates. This tool provides an approximate window, not a definitive date.</dd>
+        <dt>Can I use this without creating an account?</dt>
+        <dd>Yes. No account is required. You can use the calculator immediately without signing up or logging in.</dd>
+        <dt>Does QuietDue work offline?</dt>
+        <dd>Yes. Once the page loads, the calculator runs entirely in your browser and works without an internet connection.</dd>
+        <dt>Is this medical advice?</dt>
+        <dd>No. QuietDue provides estimates for informational purposes only. It does not replace advice from a healthcare provider.</dd>
+      </dl>
     </section>
   </main>
 
+  <!-- 8. Minimal, respectful footer -->
   <footer>
-    <p class="disclaimer">This tool provides estimates for informational purposes only. It is not medical advice.</p>
+    <p class="footer-privacy">Nothing you enter here is saved or shared. Your data stays on your device.</p>
+    <p class="footer-disclaimer">This tool provides estimates for informational purposes only. It is not medical advice.</p>
+    <p class="footer-about"><a href="/about/">About QuietDue</a></p>
     <nav class="footer-links" aria-label="Footer">
-      <a href="/about/">About</a>
-      <a href="/editorial-policy/">Editorial Policy</a>
       <a href="/privacy/">Privacy</a>
-      <a href="/medical-disclaimer/">Medical Disclaimer</a>
+      <a href="/medical-disclaimer/">Medical disclaimer</a>
       <a href="/contact/">Contact</a>
     </nav>
     <p class="copyright">© QuietDue</p>
   </footer>
-  <script src="/assets/js/calculator.js" defer></script>
+
 </body>
 </html>
