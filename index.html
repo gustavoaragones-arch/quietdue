@@ -31,7 +31,7 @@
     <!-- 1. Hero — trust-first, privacy statement -->
     <section class="hero" aria-labelledby="hero-heading">
       <h1 id="hero-heading">Quiet clarity for early pregnancy.</h1>
-      <p class="hero-tagline">Understand where you are — without accounts, tracking, or stored data.</p>
+      <p class="hero-tagline">Understand where you are — without accounts, tracking, or stored data. No pressure. No judgment.</p>
       <p class="hero-positioning">QuietDue is a private, offline early-pregnancy calculator for people who want clarity without creating a data trail.</p>
       <div class="hero-trust" role="complementary" aria-label="Privacy promise">
         <p>Many pregnancy tools store your data by default. QuietDue runs entirely in your browser. Nothing is saved. Nothing is sent.</p>
@@ -54,9 +54,18 @@
     <!-- 3. Early pregnancy context — empathetic -->
     <section class="context-section" aria-labelledby="context-heading">
       <h2 id="context-heading">Early pregnancy is uncertain by nature</h2>
+      <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
       <p>Dates shift. Cycle length and ovulation timing vary from person to person. What we call &ldquo;week 6&rdquo; today might be recalculated after more information is available. That&rsquo;s normal.</p>
       <p>Early ultrasounds often change estimates. Measurements in the first trimester can differ from dates based on your last period—and providers may adjust your due date accordingly. It doesn&rsquo;t mean anything went wrong; it just means early pregnancy dating is imprecise.</p>
       <p>Week numbers can feel confusing. Different sources count differently. This tool gives you a best estimate so you can orient yourself—without pretending it&rsquo;s exact.</p>
+
+      <details class="meaning-callout">
+        <summary>What this means / What it doesn&rsquo;t mean</summary>
+        <div class="meaning-callout-content">
+          <p><strong>What this means:</strong> Uncertainty is normal. Dates often get refined as more information becomes available. That&rsquo;s expected, not a sign of a problem.</p>
+          <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t mean you&rsquo;re doing something wrong or that anything is wrong with your pregnancy. It simply reflects how early dating works.</p>
+        </div>
+      </details>
     </section>
 
     <!-- 4. What this is / what this is not -->
@@ -84,21 +93,111 @@
       </div>
     </section>
 
-    <!-- 5. Calculator placeholder — no logic -->
-    <section class="calculator-placeholder" aria-label="Calculator coming soon">
-      <h2>Calculator</h2>
-      <p>The calculator will live entirely on this page and work offline. It will be available here shortly.</p>
-      <div class="calc-skeleton" aria-hidden="true">
-        <div class="skeleton-line"></div>
-        <div class="skeleton-line skeleton-short"></div>
+    <!-- 5. Calculator — progressive disclosure, empathetic tone (logic coming in Phase 1) -->
+    <section class="calculator-section calculator-progressive" aria-labelledby="calc-heading">
+      <h2 id="calc-heading">Calculator</h2>
+      <p class="calc-intro">One step at a time. You can stop anytime. Take your time.</p>
+
+      <form class="calc-form" id="calculator-form" novalidate>
+        <div class="calc-step calc-step-current">
+          <label for="lmp-date">First day of your last menstrual period</label>
+          <input type="date" id="lmp-date" name="lmp-date" aria-describedby="calc-helper">
+          <p id="calc-helper" class="calc-helper">You don&rsquo;t need to be exact. Estimates are okay.</p>
+          <details class="calc-uncertainty" id="calc-optional">
+            <summary>Not sure about your dates?</summary>
+            <p>Many people aren&rsquo;t. You can use your best guess—your provider will help refine it when you have more information. There&rsquo;s no wrong way to start.</p>
+          </details>
+        </div>
+
+        <div class="calc-step calc-step-next">
+          <button type="submit" class="btn btn-primary" id="calc-submit" disabled>See estimate</button>
+        </div>
+      </form>
+
+      <p class="calc-reassurance">Everything stays in your browser. Nothing is saved. You can leave anytime—closing this page erases it.</p>
+      <p class="trust-signals">No cookies · No analytics · Works offline · Nothing saved</p>
+
+      <div class="confidence-preview" aria-hidden="true">
+        <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
+        <div class="confidence-bar" role="presentation">
+          <span class="confidence-range"></span>
+        </div>
+        <p class="confidence-label">Estimated due window</p>
       </div>
+
+      <div class="milestones-framing">
+        <h3>Early milestones (when you use the calculator)</h3>
+        <p class="milestone-intro">The calculator will show approximate windows for a few common reference points—not exact dates.</p>
+        <ul class="milestone-list">
+          <li>
+            <span class="milestone-label">Around implantation</span>
+            <span class="milestone-desc">Many people first confirm pregnancy around this time. It&rsquo;s also normal if things feel unclear.</span>
+          </li>
+          <li>
+            <span class="milestone-label">Weeks 5–6</span>
+            <span class="milestone-desc">This is often when a first appointment might be scheduled. Timing varies—and that&rsquo;s okay.</span>
+          </li>
+          <li>
+            <span class="milestone-label">First ultrasound</span>
+            <span class="milestone-desc">Usually offered somewhere in the first trimester. Practices differ. Your provider will guide you.</span>
+          </li>
+        </ul>
+      </div>
+
+      <details class="meaning-callout">
+        <summary>What this means / What it doesn&rsquo;t mean</summary>
+        <div class="meaning-callout-content">
+          <p><strong>What this means:</strong> The range reflects normal variation in cycles and ovulation. It helps you orient yourself and gives you something to work with before a first appointment.</p>
+          <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t mean anything is wrong. It&rsquo;s not a diagnosis. Your provider may use different dates after an ultrasound—that&rsquo;s normal.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- 5b. Printable timeline preview (no download yet) -->
+    <section class="timeline-preview" aria-labelledby="timeline-heading">
+      <h2 id="timeline-heading">Your timeline</h2>
+      <p class="timeline-preview-intro">After you see your estimate, you&rsquo;ll be able to print a one-page timeline—or save it for offline. No account required.</p>
+      <p class="timeline-preview-badges">Printable. Offline. No account required.</p>
+
+      <div class="timeline-preview-mock" role="presentation" aria-hidden="true">
+        <div class="timeline-mock-page">
+          <div class="timeline-mock-header">Early Pregnancy Timeline</div>
+          <div class="timeline-mock-row">
+            <span class="timeline-mock-week">Week 5–6</span>
+            <span class="timeline-mock-desc">First appointment may be scheduled</span>
+          </div>
+          <div class="timeline-mock-row">
+            <span class="timeline-mock-week">Week 7–9</span>
+            <span class="timeline-mock-desc">First ultrasound often offered</span>
+          </div>
+          <div class="timeline-mock-row">
+            <span class="timeline-mock-week">Estimated due window</span>
+            <span class="timeline-mock-desc">Range shown—not a single date</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5c. Fertility timing teaser — context only, no CTA -->
+    <section class="teaser-block" aria-labelledby="teaser-heading">
+      <h2 id="teaser-heading">Understanding fertility timing before and after pregnancy</h2>
+      <p>Knowing when things happen in your cycle helps with many decisions—whether you&rsquo;re planning, avoiding, or simply curious. Fertility windows, cycle timing, and how methods align with your body&rsquo;s rhythm are part of that picture. This is educational context, not advice.</p>
     </section>
 
     <!-- 6. Disclaimer -->
     <section class="disclaimer-section" aria-labelledby="disclaimer-heading">
       <h2 id="disclaimer-heading">About these estimates</h2>
-      <p>This tool is for informational purposes only. It does not replace advice from a healthcare provider. Early pregnancy dating is imprecise—cycle length and ovulation vary, and ultrasound may change estimates.</p>
+      <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
+      <p>This tool is for informational purposes only. It does not replace advice from a healthcare provider. Early pregnancy dating is imprecise—cycle length and ovulation vary, and ultrasound may change estimates. Whatever you&rsquo;re feeling is valid.</p>
       <p><a href="/learn/how-early-pregnancy-dating-works/">Learn how pregnancy dating works</a></p>
+
+      <details class="meaning-callout">
+        <summary>What this means / What it doesn&rsquo;t mean</summary>
+        <div class="meaning-callout-content">
+          <p><strong>What this means:</strong> This tool offers a starting point. It can help you prepare for conversations with your provider and understand the kind of information they&rsquo;ll use.</p>
+          <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t replace medical advice, diagnosis, or care. For questions about your pregnancy, please consult a healthcare provider.</p>
+        </div>
+      </details>
     </section>
 
     <!-- 7. Static FAQ -->
@@ -124,6 +223,7 @@
   <!-- 8. Minimal, respectful footer -->
   <footer>
     <div class="footer-inner">
+      <p class="trust-signals trust-signals-footer">No cookies · No analytics · Works offline · Nothing saved</p>
       <p class="footer-privacy">Nothing you enter here is saved or shared. Your data stays on your device.</p>
       <p class="footer-disclaimer">This tool provides estimates for informational purposes only. It is not medical advice.</p>
       <p class="footer-about"><a href="/about/">About QuietDue</a></p>
@@ -136,5 +236,31 @@
     </div>
   </footer>
 
+  <script>
+    (function() {
+      var form = document.getElementById('calculator-form');
+      var lmpInput = document.getElementById('lmp-date');
+      var submitBtn = document.getElementById('calc-submit');
+
+      function updateButton() {
+        if (submitBtn && lmpInput) {
+          var hasValue = lmpInput.value && lmpInput.value.trim().length > 0;
+          submitBtn.disabled = !hasValue;
+        }
+      }
+
+      if (lmpInput) {
+        lmpInput.addEventListener('input', updateButton);
+        lmpInput.addEventListener('change', updateButton);
+        updateButton();
+      }
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

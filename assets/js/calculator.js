@@ -126,7 +126,7 @@
 
   function showResults() {
     resultsSection.hidden = false;
-    resultsSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    resultsSection.scrollIntoView({ behavior: "auto", block: "nearest" });
   }
 
   function showDateMessage(text) {

@@ -1,6 +1,15 @@
 /* QuietDue — Privacy-first early pregnancy calculator
    Design: Muted palette, humanist type, large line spacing, no medical-app feel.
-   Desktop: intentional empty space, calm framing, single-column. Mobile-first. */
+   Accessibility: large tap targets, no time pressure, no auto-scroll jumps.
+   Emotional safety: no red/green, no loud reactions. QuietDue never reacts loudly.
+
+   Empathetic UX (Phase 0.5): progressive disclosure, confidence ranges not exact dates,
+   calm optional interactions, reassuring copy, gentle expandables, visual uncertainty.
+   Principles: quiet · reversible · non-judgmental · privacy-forward · mobile-first.
+
+   PHASE 0.5 — EXPLICITLY DO NOT ADD:
+   No storage (cookies, localStorage). No reminders. No notifications.
+   No user accounts. No analytics. No urgency CTAs. No medical advice. */
 
 :root {
   /* Color — off-white page, warmer content panels. Subtle contrast. */
@@ -11,9 +20,15 @@
   --color-accent: #6b7c6d;
   --color-border: #e8e6e2;
   --color-divider: rgba(58, 54, 50, 0.06);
+  --color-range-soft: rgba(107, 124, 109, 0.12);
   --color-focus: #3a3632;
   --color-focus-ring: rgba(58, 54, 50, 0.1);
   --shadow-subtle: 0 1px 2px rgba(58, 54, 50, 0.03);
+
+  /* Accessibility & emotional safety — no red/green, no loud reactions */
+  --tap-target-min: 44px;
+  /* If validation UI is added later: use neutral tones, never red/green */
+  --color-validation: var(--color-text-secondary);
 
   /* Typography — humanist sans-serif, soft weights. 60–75 char line length. */
   --font-body: system-ui, -apple-system, "Segoe UI", "Lucida Grande", "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -41,6 +56,7 @@
   --section-gap: var(--space-2xl);
   --radius: 8px;
   --radius-sm: 6px;
+  --transition-soft: 0.25s ease;
 }
 
 /* Respect reduced motion preferences — no spinners, no urgency cues */
@@ -61,6 +77,7 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
 }
 
 body {
@@ -108,6 +125,10 @@ header {
   color: var(--color-text);
   text-decoration: none;
   flex-shrink: 0;
+  padding: var(--space-sm) 0;
+  min-height: var(--tap-target-min);
+  display: inline-flex;
+  align-items: center;
 }
 
 .site-brand:hover {
@@ -131,7 +152,10 @@ header {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
   text-decoration: none;
-  padding: var(--space-xs) 0;
+  padding: var(--space-sm) var(--space-xs);
+  min-height: var(--tap-target-min);
+  display: inline-flex;
+  align-items: center;
 }
 
 .page-header nav a:hover {
@@ -449,8 +473,8 @@ main:not(.page-content) {
   margin-top: var(--space-sm);
 }
 
-/* Calculator placeholder — Phase 0, no logic. Wider on desktop. */
-.calculator-placeholder {
+/* Calculator — progressive disclosure, empathetic tone */
+.calculator-section {
   max-width: var(--max-width-wide);
   margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
@@ -459,18 +483,437 @@ main:not(.page-content) {
   box-shadow: var(--shadow-subtle);
 }
 
-.calculator-placeholder h2 {
+.calculator-progressive h2 {
   margin: 0 0 var(--space-sm);
   font-size: 1.125rem;
   font-weight: var(--font-weight-medium);
   color: var(--color-text);
 }
 
-.calculator-placeholder > p {
+.calc-intro {
   margin: 0 0 var(--space-lg);
   font-size: 0.9375rem;
   color: var(--color-text-secondary);
   line-height: var(--line-height-body);
+}
+
+.calc-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.calc-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: opacity var(--transition-soft);
+}
+
+.calc-step label {
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.calc-step input[type="date"] {
+  padding: var(--space-md) var(--space-lg);
+  min-height: var(--tap-target-min);
+  font-family: inherit;
+  font-size: 1rem; /* 16px prevents iOS zoom on focus */
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color var(--transition-soft), box-shadow var(--transition-soft);
+}
+
+.calc-step input[type="date"]:hover {
+  border-color: #d8d5d0;
+}
+
+.calc-step input[type="date"]:focus {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+.calc-step input[type="date"]:focus-visible {
+  outline: none;
+}
+
+.calc-helper {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+/* Optional "Not sure about your dates?" — calm, inline, non-intrusive */
+.calc-uncertainty {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-divider);
+}
+
+.calc-uncertainty summary {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  padding: var(--space-sm) 0;
+  min-height: var(--tap-target-min);
+  display: flex;
+  align-items: center;
+}
+
+.calc-uncertainty summary::-webkit-details-marker,
+.calc-uncertainty summary::marker {
+  display: none;
+}
+
+.calc-uncertainty summary::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: var(--space-sm);
+  border-right: 1px solid var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-text-secondary);
+  transform: rotate(-45deg);
+  transform-origin: 50% 50%;
+  transition: transform var(--transition-soft);
+}
+
+.calc-uncertainty[open] summary::before {
+  transform: rotate(45deg);
+}
+
+.calc-uncertainty summary:hover {
+  color: var(--color-text);
+}
+
+.calc-uncertainty p {
+  margin: var(--space-md) 0 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.calc-step-next {
+  opacity: 0.7;
+  transition: opacity var(--transition-soft);
+}
+
+.calc-form:focus-within .calc-step-next {
+  opacity: 1;
+}
+
+.calc-step-next .btn {
+  align-self: flex-start;
+  width: auto;
+  min-width: 10rem;
+}
+
+.calc-reassurance {
+  margin: var(--space-lg) 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+/* Micro-trust signals — text only, very subtle, never badges or icons */
+.trust-signals {
+  margin: var(--space-md) 0 0;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+.trust-signals-footer {
+  margin: 0 0 var(--space-sm);
+}
+
+/* Range copy pattern — use everywhere */
+.range-copy {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+/* Confidence window visualization — soft bars, shaded ranges, no sharp markers.
+   Visual normalization of uncertainty: gradient suggests range, not a point. */
+.confidence-preview {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-divider);
+  transition: opacity var(--transition-soft);
+}
+
+.confidence-preview .range-copy {
+  margin: 0 0 var(--space-md);
+  font-style: normal;
+}
+
+.confidence-bar {
+  display: block;
+  width: 100%;
+  height: 1.5rem;
+  background: var(--color-bg);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.confidence-range {
+  display: block;
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(107, 124, 109, 0.04) 0%,
+    rgba(107, 124, 109, 0.14) 25%,
+    rgba(107, 124, 109, 0.18) 50%,
+    rgba(107, 124, 109, 0.14) 75%,
+    rgba(107, 124, 109, 0.04) 100%
+  );
+  border-radius: 999px;
+}
+
+.confidence-label {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+/* Early milestones framing — ranges, no definitive language, paired with reassurance */
+.milestones-framing {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-divider);
+}
+
+.milestones-framing h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.milestone-intro {
+  margin: 0 0 var(--space-md);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.milestone-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.milestone-list li {
+  margin-bottom: var(--space-md);
+  padding-left: 0;
+}
+
+.milestone-list li:last-child {
+  margin-bottom: 0;
+}
+
+.milestone-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.milestone-desc {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+/* What this means / What it doesn't mean — expandable micro-callouts */
+.meaning-callout {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-divider);
+}
+
+.meaning-callout summary {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  padding: var(--space-sm) 0;
+  min-height: var(--tap-target-min);
+  display: flex;
+  align-items: center;
+}
+
+.meaning-callout summary::-webkit-details-marker {
+  display: none;
+}
+
+.meaning-callout summary::marker {
+  display: none;
+}
+
+.meaning-callout summary::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: var(--space-sm);
+  border-right: 1px solid var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-text-secondary);
+  transform: rotate(-45deg);
+  transform-origin: 50% 50%;
+  transition: transform var(--transition-soft);
+}
+
+.meaning-callout[open] summary::before {
+  transform: rotate(45deg);
+}
+
+.meaning-callout summary:hover {
+  color: var(--color-text);
+}
+
+.meaning-callout-content {
+  margin-top: var(--space-md);
+}
+
+.meaning-callout-content p {
+  margin: 0 0 var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.meaning-callout-content p:last-child {
+  margin-bottom: 0;
+}
+
+.meaning-callout-content strong {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+/* Printable timeline preview — one-page vertical timeline mock */
+.timeline-preview {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
+}
+
+.timeline-preview h2 {
+  margin: 0 0 var(--space-sm);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.timeline-preview-intro {
+  margin: 0 0 var(--space-md);
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.timeline-preview-badges {
+  margin: 0 0 var(--space-lg);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.timeline-preview-mock {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  padding: var(--space-xl);
+}
+
+.timeline-mock-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.timeline-mock-header {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.timeline-mock-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.timeline-mock-week {
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.timeline-mock-desc {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Teaser block — context only, no CTA, no button */
+.teaser-block {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
+}
+
+.teaser-block h2 {
+  margin: 0 0 var(--space-md);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.teaser-block p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+/* Calculator placeholder (legacy, if used elsewhere) */
+.calculator-placeholder {
+  max-width: var(--max-width-wide);
+  margin: 0 auto var(--section-gap);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .calc-skeleton {
@@ -485,16 +928,6 @@ main:not(.page-content) {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   opacity: 0.6;
-}
-
-.skeleton-line.skeleton-short {
-  width: 50%;
-  max-width: 10rem;
-}
-
-/* Calculator section (when logic added in future) */
-.calculator-section {
-  margin-bottom: var(--space-3xl);
 }
 
 /* Secondary tool intro — educational timing (no logic) */
@@ -540,6 +973,7 @@ main:not(.page-content) {
 
 .form-group input[type="date"] {
   padding: var(--space-md) var(--space-lg);
+  min-height: var(--tap-target-min);
   font-family: inherit;
   font-size: 1rem;
   color: var(--color-text);
@@ -674,6 +1108,7 @@ main:not(.page-content) {
 
 .btn {
   padding: var(--space-md) var(--space-lg);
+  min-height: var(--tap-target-min);
   font-family: inherit;
   font-size: 0.9375rem;
   font-weight: 500;
@@ -684,6 +1119,9 @@ main:not(.page-content) {
   cursor: pointer;
   width: 100%;
   text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn:hover:not(:disabled) {
@@ -887,6 +1325,10 @@ footer::before {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
   text-decoration: none;
+  padding: var(--space-sm) 0;
+  min-height: var(--tap-target-min);
+  display: inline-flex;
+  align-items: center;
 }
 
 .footer-about a:hover {
@@ -905,6 +1347,10 @@ footer::before {
   font-size: 0.8125rem;
   color: var(--color-text-secondary);
   text-decoration: none;
+  padding: var(--space-sm) var(--space-xs);
+  min-height: var(--tap-target-min);
+  display: inline-flex;
+  align-items: center;
 }
 
 .footer-links a:hover {
@@ -964,7 +1410,10 @@ footer::before {
   .data-section,
   .context-section,
   .identity-section,
+  .calculator-section,
   .calculator-placeholder,
+  .timeline-preview,
+  .teaser-block,
   .disclaimer-section,
   .faq-section {
     padding: var(--space-2xl);
@@ -992,6 +1441,8 @@ footer::before {
   .identity-section,
   .calculator-placeholder,
   .calculator-section,
+  .timeline-preview,
+  .teaser-block,
   .disclaimer-section,
   .disclaimer-block,
   .faq-section,
@@ -1072,6 +1523,7 @@ footer::before {
   .footer-privacy,
   .footer-disclaimer,
   .footer-about,
+  .trust-signals,
   .copyright {
     color: #666;
     font-size: 9pt;
