@@ -1,19 +1,21 @@
 /* QuietDue — Privacy-first early pregnancy calculator
    Design: Muted palette, humanist type, large line spacing, no medical-app feel.
-   No bright pinks/blues. No spinners. No urgency cues. Mobile-first. */
+   Desktop: intentional empty space, calm framing, single-column. Mobile-first. */
 
 :root {
-  /* Color — muted warm neutrals, soft grays. No bright pink/blue. */
-  --color-bg: #f5f4f1;
-  --color-surface: #fcfbf9;
+  /* Color — off-white page, warmer content panels. Subtle contrast. */
+  --color-bg: #f3f2ef;
+  --color-surface: #faf9f6;
   --color-text: #3a3632;
   --color-text-secondary: #6f6a65;
   --color-accent: #6b7c6d;
-  --color-border: #e6e4e0;
+  --color-border: #e8e6e2;
+  --color-divider: rgba(58, 54, 50, 0.06);
   --color-focus: #3a3632;
   --color-focus-ring: rgba(58, 54, 50, 0.1);
+  --shadow-subtle: 0 1px 2px rgba(58, 54, 50, 0.03);
 
-  /* Typography — humanist sans-serif, soft weights. Avoid medical-app feel. */
+  /* Typography — humanist sans-serif, soft weights. 60–75 char line length. */
   --font-body: system-ui, -apple-system, "Segoe UI", "Lucida Grande", "Trebuchet MS", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -32,8 +34,11 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
 
-  /* Layout — comfortable reading width, mobile-first */
+  /* Layout — responsive max-width. Reading: 60–75ch. Wide: hero/calculator. */
+  --max-width-reading: 42rem;
+  --max-width-wide: 51.25rem;
   --max-width: 32rem;
+  --section-gap: var(--space-2xl);
   --radius: 8px;
   --radius-sm: 6px;
 }
@@ -82,7 +87,7 @@ header {
   justify-content: space-between;
   gap: var(--space-md);
   padding: var(--space-md) var(--space-lg);
-  max-width: 56rem;
+  max-width: var(--max-width-wide);
   margin: 0 auto;
 }
 
@@ -233,8 +238,10 @@ header {
   color: var(--color-accent);
 }
 
-/* Hero — trust-first, privacy statement */
+/* Hero — trust-first, privacy statement. Wider on desktop. */
 .hero {
+  max-width: var(--max-width-wide);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-3xl) var(--space-lg) var(--space-xl);
   text-align: center;
 }
@@ -260,8 +267,8 @@ header {
   margin-top: var(--space-xl);
   padding: var(--space-xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
   text-align: left;
 }
 
@@ -274,11 +281,12 @@ header {
 
 /* Data section — explicit what we don't collect */
 .data-section {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
-  margin-bottom: var(--space-2xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .data-section h2 {
@@ -310,17 +318,18 @@ header {
 .data-closing {
   margin-top: var(--space-lg);
   padding-top: var(--space-lg);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-divider);
   margin-bottom: 0 !important;
 }
 
 /* Early pregnancy context — empathetic */
 .context-section {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
-  margin-bottom: var(--space-2xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .context-section h2 {
@@ -343,7 +352,12 @@ header {
 
 /* What this is / isn't — product framing */
 .identity-section {
-  margin-bottom: var(--space-2xl);
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .identity-section h2 {
@@ -402,19 +416,26 @@ h1 {
   line-height: var(--line-height-body);
 }
 
+/* Main — full-width wrapper, centered sections with adaptive max-width */
+.page-content,
 main {
-  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--space-lg) var(--space-3xl);
 }
 
+/* Fallback for pages without .page-content */
+main:not(.page-content) {
+  max-width: var(--max-width-reading);
+}
+
 /* Trust block — privacy explanation */
 .trust-block {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
-  margin-bottom: var(--space-2xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .trust-block p {
@@ -428,13 +449,14 @@ main {
   margin-top: var(--space-sm);
 }
 
-/* Calculator placeholder — Phase 0, no logic */
+/* Calculator placeholder — Phase 0, no logic. Wider on desktop. */
 .calculator-placeholder {
+  max-width: var(--max-width-wide);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
-  margin-bottom: var(--space-2xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .calculator-placeholder h2 {
@@ -477,11 +499,12 @@ main {
 
 /* Secondary tool intro — educational timing (no logic) */
 .secondary-tool-intro {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
-  margin-bottom: var(--space-2xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .secondary-tool-intro h2 {
@@ -699,10 +722,12 @@ main {
 
 /* Privacy badge */
 .privacy-badge {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .privacy-badge h2 {
@@ -737,11 +762,12 @@ main {
 /* Disclaimer section — about estimates */
 .disclaimer-section,
 .disclaimer-block {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
-  margin-bottom: var(--space-2xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .disclaimer-section h2,
@@ -778,11 +804,12 @@ main {
 
 /* FAQ — SEO-safe static */
 .faq-section {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
   padding: var(--space-xl);
-  margin-bottom: var(--space-2xl);
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
 }
 
 .faq-section h2 {
@@ -815,13 +842,27 @@ main {
   padding-left: 0;
 }
 
-/* Footer — quiet, minimal */
+/* Footer — quiet, minimal. Full-width bar, content centered. */
 footer {
+  position: relative;
   margin-top: var(--space-3xl);
   padding: var(--space-2xl) var(--space-lg);
-  background-color: var(--color-surface);
-  border-top: 1px solid var(--color-border);
   text-align: center;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 -9999px;
+  top: -1px;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-divider);
+  z-index: -1;
+}
+
+.footer-inner {
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
 }
 
 .footer-privacy {
@@ -898,6 +939,35 @@ footer {
   .btn {
     width: auto;
     min-width: 10rem;
+  }
+}
+
+/* Desktop — breathing room, intentional empty space, avoid mobile blown up */
+@media (min-width: 768px) {
+  :root {
+    --section-gap: 4rem;
+  }
+
+  body {
+    line-height: 1.9;
+  }
+
+  .page-content {
+    padding: 0 var(--space-2xl) var(--space-3xl);
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-xl) var(--space-2xl);
+  }
+
+  .hero-trust,
+  .data-section,
+  .context-section,
+  .identity-section,
+  .calculator-placeholder,
+  .disclaimer-section,
+  .faq-section {
+    padding: var(--space-2xl);
   }
 }
 
