@@ -8,7 +8,14 @@
   <link rel="canonical" href="https://quietdue.com/">
   <link rel="alternate" hreflang="en" href="https://quietdue.com/">
   <link rel="alternate" hreflang="x-default" href="https://quietdue.com/">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="print.css" media="print">
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js", { scope: "/" });
+    }
+  </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is QuietDue private?","acceptedAnswer":{"@type":"Answer","text":"Yes. QuietDue runs entirely in your browser. It does not create accounts, use trackers, store your inputs, or sync to the cloud. Closing the page erases everything."}},{"@type":"Question","name":"Does this calculator save my data?","acceptedAnswer":{"@type":"Answer","text":"No. Nothing is saved. Your dates and results stay on your device and are never sent to a server."}},{"@type":"Question","name":"How accurate are early due dates?","acceptedAnswer":{"@type":"Answer","text":"Early pregnancy dating is imprecise. Cycle length and ovulation timing vary. Ultrasound may change estimates. This tool provides an approximate window, not a definitive date."}},{"@type":"Question","name":"Can I use this without creating an account?","acceptedAnswer":{"@type":"Answer","text":"Yes. No account is required. You can use the calculator immediately without signing up or logging in."}},{"@type":"Question","name":"Does QuietDue work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once the page loads, the calculator runs entirely in your browser and works without an internet connection."}},{"@type":"Question","name":"Is this medical advice?","acceptedAnswer":{"@type":"Answer","text":"No. QuietDue provides estimates for informational purposes only. It does not replace advice from a healthcare provider."}}]}
   </script>
@@ -93,7 +100,7 @@
       </div>
     </section>
 
-    <!-- 5. Calculator — progressive disclosure, empathetic tone (logic coming in Phase 1) -->
+    <!-- 5. Calculator — progressive disclosure, client-side engine (Phase 1) -->
     <section class="calculator-section calculator-progressive" aria-labelledby="calc-heading">
       <h2 id="calc-heading">Calculator</h2>
       <p class="calc-intro">One step at a time. You can stop anytime. Take your time.</p>
@@ -113,33 +120,55 @@
           <button type="submit" class="btn btn-primary" id="calc-submit" disabled>See estimate</button>
         </div>
       </form>
+      <p id="date-message" class="calc-date-message" hidden aria-live="polite"></p>
 
       <p class="calc-reassurance">Everything stays in your browser. Nothing is saved. You can leave anytime—closing this page erases it.</p>
-      <p class="trust-signals">No cookies · No analytics · Works offline · Nothing saved</p>
+      <p class="trust-signals">Works offline. Nothing saved.</p>
 
-      <div class="confidence-preview" aria-hidden="true">
+      <!-- Results: shown after calculation. All values in memory only. -->
+      <div class="calc-results" id="calc-results" hidden aria-live="polite">
+        <h3>Your estimate</h3>
+        <dl class="results-grid">
+          <dt>Gestational age</dt>
+          <dd class="result-week" id="result-week"></dd>
+          <dt>Estimated due window</dt>
+          <dd class="result-confidence" id="result-confidence"></dd>
+        </dl>
+        <div class="results-actions">
+          <button type="button" class="btn btn-primary" data-action="print">Print timeline</button>
+          <button type="button" class="btn btn-secondary" data-action="ics">Add to calendar</button>
+        </div>
+        <p id="action-message" class="calc-action-message" hidden aria-live="polite"></p>
+      </div>
+
+      <div class="confidence-preview" id="confidence-preview" aria-hidden="true">
         <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
         <div class="confidence-bar" role="presentation">
           <span class="confidence-range"></span>
         </div>
-        <p class="confidence-label">Estimated due window</p>
+        <p class="confidence-label" id="confidence-label">Estimated due window</p>
       </div>
 
-      <div class="milestones-framing">
-        <h3>Early milestones (when you use the calculator)</h3>
-        <p class="milestone-intro">The calculator will show approximate windows for a few common reference points—not exact dates.</p>
-        <ul class="milestone-list">
+      <div class="confidence-block" aria-live="polite">
+        <p>Early pregnancy dates often shift after the first ultrasound.</p>
+        <p>A difference of several days is very common.</p>
+      </div>
+
+      <div class="milestones-framing" id="milestones-framing">
+        <h3>Early milestones</h3>
+        <p class="milestone-intro">Approximate windows for common reference points—not exact dates.</p>
+        <ul class="milestone-list" id="milestone-list">
           <li>
-            <span class="milestone-label">Around implantation</span>
-            <span class="milestone-desc">Many people first confirm pregnancy around this time. It&rsquo;s also normal if things feel unclear.</span>
+            <span class="milestone-label">Implantation window (approx 3–4 weeks from LMP)</span>
+            <span class="milestone-desc">Implantation often occurs in this window. Timing can vary significantly.</span>
           </li>
           <li>
-            <span class="milestone-label">Weeks 5–6</span>
-            <span class="milestone-desc">This is often when a first appointment might be scheduled. Timing varies—and that&rsquo;s okay.</span>
+            <span class="milestone-label">Weeks 5–6: typical first heartbeat detection window</span>
+            <span class="milestone-desc">Many providers schedule a first appointment in this range. Heartbeat is often detectable around this time.</span>
           </li>
           <li>
-            <span class="milestone-label">First ultrasound</span>
-            <span class="milestone-desc">Usually offered somewhere in the first trimester. Practices differ. Your provider will guide you.</span>
+            <span class="milestone-label">First ultrasound window (weeks 7–9)</span>
+            <span class="milestone-desc">Many providers offer a first ultrasound in this window. Timing can vary significantly.</span>
           </li>
         </ul>
       </div>
@@ -224,6 +253,7 @@
   <footer>
     <div class="footer-inner">
       <p class="trust-signals trust-signals-footer">No cookies · No analytics · Works offline · Nothing saved</p>
+      <p class="footer-privacy-guarantee">QuietDue does not store or transmit your data.</p>
       <p class="footer-privacy">Nothing you enter here is saved or shared. Your data stays on your device.</p>
       <p class="footer-disclaimer">This tool provides estimates for informational purposes only. It is not medical advice.</p>
       <p class="footer-about"><a href="/about/">About QuietDue</a></p>
@@ -236,31 +266,6 @@
     </div>
   </footer>
 
-  <script>
-    (function() {
-      var form = document.getElementById('calculator-form');
-      var lmpInput = document.getElementById('lmp-date');
-      var submitBtn = document.getElementById('calc-submit');
-
-      function updateButton() {
-        if (submitBtn && lmpInput) {
-          var hasValue = lmpInput.value && lmpInput.value.trim().length > 0;
-          submitBtn.disabled = !hasValue;
-        }
-      }
-
-      if (lmpInput) {
-        lmpInput.addEventListener('input', updateButton);
-        lmpInput.addEventListener('change', updateButton);
-        updateButton();
-      }
-
-      if (form) {
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-        });
-      }
-    })();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>

@@ -9,7 +9,9 @@
 
    PHASE 0.5 — EXPLICITLY DO NOT ADD:
    No storage (cookies, localStorage). No reminders. No notifications.
-   No user accounts. No analytics. No urgency CTAs. No medical advice. */
+   No user accounts. No analytics. No urgency CTAs. No medical advice.
+   PRIVACY GUARANTEE: No analytics script. No cookies banner. No fetch().
+   No localStorage. No sessionStorage. */
 
 :root {
   /* Color — off-white page, warmer content panels. Subtle contrast. */
@@ -452,6 +454,58 @@ main:not(.page-content) {
   max-width: var(--max-width-reading);
 }
 
+/* Calculator results — shown after submission, in memory only. Smooth reveal, no scroll jump. */
+.calc-results {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-divider);
+}
+
+.calc-results:not([hidden]) {
+  animation: calc-results-fade 0.35s ease;
+}
+
+@keyframes calc-results-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.calc-results h3 {
+  margin: 0 0 var(--space-md);
+  font-size: 0.9375rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.calc-results .results-grid {
+  margin: 0 0 var(--space-lg);
+}
+
+.results-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.results-actions .btn {
+  flex: 0 0 auto;
+}
+
+.calc-date-message,
+.calc-action-message {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.875rem;
+  color: var(--color-validation, var(--color-text-secondary));
+}
+
+.calc-action-message {
+  margin-top: var(--space-md);
+}
+
 /* Trust block — privacy explanation */
 .trust-block {
   max-width: var(--max-width-reading);
@@ -693,6 +747,26 @@ main:not(.page-content) {
   color: var(--color-text-secondary);
 }
 
+/* Confidence block — required reassurance; always shown. Reduces liability and anxiety. */
+.confidence-block {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background-color: var(--color-bg);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-range-soft);
+}
+
+.confidence-block p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.confidence-block p + p {
+  margin-top: var(--space-sm);
+}
+
 /* Early milestones framing — ranges, no definitive language, paired with reassurance */
 .milestones-framing {
   margin-top: var(--space-xl);
@@ -763,10 +837,7 @@ main:not(.page-content) {
   align-items: center;
 }
 
-.meaning-callout summary::-webkit-details-marker {
-  display: none;
-}
-
+.meaning-callout summary::-webkit-details-marker,
 .meaning-callout summary::marker {
   display: none;
 }
@@ -1303,8 +1374,16 @@ footer::before {
   margin: 0 auto;
 }
 
-.footer-privacy {
+.footer-privacy-guarantee {
   margin: 0;
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  line-height: var(--line-height-body);
+}
+
+.footer-privacy {
+  margin: var(--space-sm) 0 0;
   font-size: 0.8125rem;
   color: var(--color-text-secondary);
   line-height: var(--line-height-body);
@@ -1417,128 +1496,5 @@ footer::before {
   .disclaimer-section,
   .faq-section {
     padding: var(--space-2xl);
-  }
-}
-
-/* Print — early pregnancy timeline (single page, black/gray) */
-@media print {
-  @page {
-    margin: 1in;
-    size: auto;
-  }
-
-  body {
-    background: #fff;
-    color: #111;
-    font-size: 11pt;
-  }
-
-  .page-header,
-  header,
-  .hero,
-  .data-section,
-  .context-section,
-  .identity-section,
-  .calculator-placeholder,
-  .calculator-section,
-  .timeline-preview,
-  .teaser-block,
-  .disclaimer-section,
-  .disclaimer-block,
-  .faq-section,
-  .trust-block,
-  .privacy-explanation,
-  .privacy-badge,
-  .action-buttons,
-  .btn,
-  .breadcrumb,
-  .link-cta,
-  .footer-links {
-    display: none !important;
-  }
-
-  .results-section {
-    display: block !important;
-    visibility: visible !important;
-    padding: 0;
-    margin: 0;
-    border: none;
-    background: transparent;
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .results-section h2 {
-    font-size: 14pt;
-    font-weight: var(--font-weight-medium);
-    margin: 0 0 0.75rem;
-    color: #111;
-  }
-
-  .results-section h3 {
-    font-size: 11pt;
-    font-weight: var(--font-weight-medium);
-    margin: 1rem 0 0.5rem;
-    color: #333;
-  }
-
-  .results-grid {
-    margin: 0 0 0.5rem;
-  }
-
-  .results-grid dt {
-    color: #444;
-    font-weight: 400;
-  }
-
-  .results-grid dd {
-    color: #111;
-    font-weight: 500;
-  }
-
-  .milestones-placeholder {
-    color: #333;
-    margin: 0;
-    padding-left: 1.25rem;
-  }
-
-  .milestones-placeholder li {
-    margin-bottom: 0.2rem;
-    color: #333;
-  }
-
-  .milestones-placeholder strong {
-    color: #111;
-  }
-
-  footer {
-    margin-top: 1.5rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid #999;
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .disclaimer,
-  .footer-privacy,
-  .footer-disclaimer,
-  .footer-about,
-  .trust-signals,
-  .copyright {
-    color: #666;
-    font-size: 9pt;
-  }
-
-  main {
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
-  .article-content h1,
-  .article-content h2,
-  .article-content p,
-  .article-content li {
-    color: #111;
   }
 }

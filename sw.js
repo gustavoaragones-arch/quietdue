@@ -1,0 +1,66 @@
+/**
+ * QuietDue service worker
+ * Caches static assets only. Does NOT cache user input. No background sync.
+ * NOTE: Uses fetch() only for same-origin static files (HTML,CSS,JS). No user
+ * data is ever transmitted. App code (app.js) does NOT use fetch/localStorage/
+ * sessionStorage/cookies.
+ */
+const CACHE_NAME = "quietdue-v1";
+const STATIC_ASSETS = [
+  "/",
+  "/index.html",
+  "/manifest.json",
+  "/styles.css",
+  "/print.css",
+  "/app.js"
+];
+
+self.addEventListener("install", function (event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      return cache.addAll(STATIC_ASSETS);
+    }).then(function () {
+      return self.skipWaiting();
+    })
+  );
+});
+
+self.addEventListener("activate", function (event) {
+  event.waitUntil(
+    caches.keys().then(function (keys) {
+      return Promise.all(
+        keys
+          .filter(function (key) {
+            return key !== CACHE_NAME;
+          })
+          .map(function (key) {
+            return caches.delete(key);
+          })
+      );
+    }).then(function () {
+      return self.clients.claim();
+    })
+  );
+});
+
+self.addEventListener("fetch", function (event) {
+  if (event.request.method !== "GET") return;
+  if (event.request.url.includes("formspree") || event.request.url.includes("api")) return;
+
+  event.respondWith(
+    caches.match(event.request).then(function (cached) {
+      if (cached) return cached;
+      return fetch(event.request).then(function (response) {
+        const clone = response.clone();
+        if (response.status === 200 && event.request.url.startsWith(self.location.origin)) {
+          caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(event.request, clone);
+          });
+        }
+        return response;
+      }).catch(function () {
+        return caches.match("/") || caches.match("/index.html");
+      });
+    })
+  );
+});

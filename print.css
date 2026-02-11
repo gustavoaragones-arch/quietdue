@@ -1,0 +1,158 @@
+/* Print — minimal timeline. Black text. No UI clutter. No metadata. Uses window.print(). */
+@media print {
+  @page {
+    margin: 0.75in;
+    size: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: #fff;
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+
+  .page-header,
+  header,
+  nav,
+  .hero,
+  .data-section,
+  .context-section,
+  .identity-section,
+  .calculator-placeholder,
+  .timeline-preview,
+  .teaser-block,
+  .disclaimer-section,
+  .disclaimer-block,
+  .faq-section,
+  .trust-block,
+  .privacy-explanation,
+  .privacy-badge,
+  .action-buttons,
+  .btn,
+  .breadcrumb,
+  .link-cta,
+  .footer-links,
+  footer {
+    display: none !important;
+  }
+
+  .calculator-section .calc-form,
+  .calculator-section .calc-date-message,
+  .calculator-section .calc-reassurance,
+  .calculator-section .trust-signals,
+  .calculator-section .confidence-preview,
+  .calculator-section .meaning-callout,
+  .calculator-section .results-actions {
+    display: none !important;
+  }
+
+  .calculator-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+
+  .calculator-section .calc-results[hidden] {
+    display: none !important;
+  }
+
+  .calculator-section .calc-results:not([hidden]) {
+    display: block !important;
+    visibility: visible !important;
+    padding: 0;
+    margin: 0 0 1rem;
+    border: none;
+  }
+
+  .calculator-section .calc-results h3 {
+    font-size: 12pt;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: #000;
+  }
+
+  .calculator-section .results-grid {
+    margin: 0 0 1rem;
+  }
+
+  .calculator-section .results-grid dt {
+    color: #333;
+    font-weight: 400;
+  }
+
+  .calculator-section .results-grid dd {
+    color: #000;
+    font-weight: 500;
+  }
+
+  .calculator-section .confidence-block {
+    display: block !important;
+    margin: 0 0 1rem;
+    padding: 0.5rem 0;
+    border: none;
+    border-left: 3px solid #999;
+    padding-left: 0.75rem;
+  }
+
+  .calculator-section .confidence-block p {
+    color: #333;
+    font-size: 10pt;
+  }
+
+  .calculator-section .milestones-framing {
+    display: block !important;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .calculator-section .milestones-framing h3 {
+    font-size: 11pt;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: #000;
+  }
+
+  .calculator-section .milestone-intro {
+    display: none;
+  }
+
+  .calculator-section .milestone-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .calculator-section .milestone-list li {
+    margin-bottom: 0.75rem;
+    padding: 0;
+  }
+
+  .calculator-section .milestone-label {
+    font-weight: 600;
+    color: #000;
+  }
+
+  .calculator-section .milestone-desc {
+    color: #333;
+    font-size: 10pt;
+  }
+
+  main,
+  .page-content {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
