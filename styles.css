@@ -578,6 +578,27 @@ main:not(.page-content) {
   margin-top: 0;
 }
 
+.print-status {
+  margin: var(--space-sm) 0 0 !important;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.print-privacy-note {
+  margin: var(--space-sm) 0 0 !important;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* Print overlay — hidden on screen, shown only when printing */
+.print-overlay {
+  display: none;
+}
+
+.print-overlay.hidden {
+  display: none;
+}
+
 /* Calculator — progressive disclosure, empathetic tone */
 .calculator-section {
   max-width: var(--max-width-wide);
@@ -828,6 +849,95 @@ main:not(.page-content) {
 
 .confidence-block p + p {
   margin-top: var(--space-sm);
+}
+
+/* Fertility visualization — Cycle Timing Overview */
+.fertility-visualization {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-divider);
+}
+
+.fertility-visualization h2 {
+  margin: 0 0 var(--space-sm);
+  font-size: 1rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.timing-subtext {
+  margin: 0 0 var(--space-md);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.cycle-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.cycle-day {
+  flex: 1 1 0;
+  min-width: 5px;
+  height: 16px;
+  background: #e5e5e5;
+  border-radius: 2px;
+  transition: background 0.3s ease;
+  cursor: default;
+}
+
+.cycle-day.fertile-range {
+  background: linear-gradient(to top, #d8c6ff, #bca3ff);
+}
+
+.cycle-day.ovulation-peak {
+  background: #8a6cff;
+}
+
+.cycle-legend {
+  margin-top: var(--space-sm);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.cycle-legend span::before {
+  content: "";
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: var(--space-xs);
+  vertical-align: 0.1em;
+  border-radius: 2px;
+}
+
+.cycle-legend span:first-child::before {
+  background: #bca3ff;
+}
+
+.cycle-legend span:last-child::before {
+  background: #8a6cff;
+}
+
+.cycle-tap-tooltip {
+  margin-top: var(--space-sm);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.visual-disclaimer {
+  margin-top: var(--space-md);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
 }
 
 /* Fertility window — soft calendar-style visual block */

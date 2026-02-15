@@ -3,6 +3,7 @@
  * Runs entirely in the browser. No data is saved, stored, or sent anywhere.
  * PRIVACY: No fetch, localStorage, sessionStorage, cookies, analytics.
  * Pure JS only. No API. No Worker. No storage.
+ * // Future: allow PDF download generation (client-side only)
  */
 (function () {
   "use strict";
@@ -22,6 +23,9 @@
   const lmpError = document.getElementById("fertility-lmp-error");
   const cycleError = document.getElementById("fertility-cycle-error");
   const varError = document.getElementById("fertility-var-error");
+  const printOverlay = document.getElementById("print-overlay");
+
+  var lastResult = null;
 
   function addDays(date, days) {
     const result = new Date(date);
@@ -225,7 +229,92 @@
       }
     }
 
+    renderCycleBar(result.cycle, result.fertileStartDay, result.fertileEndDay, result.cycle - 14);
+    lastResult = result;
     resultsSection.hidden = false;
+  }
+
+  function renderCycleBar(cycleLength, fertileStart, fertileEnd, ovulationDay) {
+    var container = document.getElementById("cycle-bar");
+    var tapTooltip = document.getElementById("cycle-tap-tooltip");
+    if (!container) return;
+    container.innerHTML = "";
+
+    for (var day = 1; day <= cycleLength; day++) {
+      var div = document.createElement("div");
+      div.classList.add("cycle-day");
+
+      var tooltipText;
+      if (day === ovulationDay) {
+        div.classList.add("ovulation-peak");
+        tooltipText = "Day " + day + " — estimated ovulation";
+      } else if (day >= fertileStart && day <= fertileEnd) {
+        div.classList.add("fertile-range");
+        tooltipText = "Day " + day + " — within fertile window";
+      } else {
+        tooltipText = "Day " + day;
+      }
+
+      div.setAttribute("title", tooltipText);
+      div.setAttribute("data-day-tooltip", tooltipText);
+
+      div.addEventListener("click", function () {
+        var txt = this.getAttribute("data-day-tooltip");
+        if (tapTooltip) {
+          if (tapTooltip.textContent === txt && !tapTooltip.hidden) {
+            tapTooltip.hidden = true;
+            tapTooltip.textContent = "";
+          } else {
+            tapTooltip.textContent = txt;
+            tapTooltip.hidden = false;
+          }
+        }
+      });
+
+      container.appendChild(div);
+    }
+
+    if (tapTooltip) {
+      tapTooltip.hidden = true;
+      tapTooltip.textContent = "";
+    }
+  }
+
+  function generatePrintOverlay(data) {
+    var overlay = document.getElementById("print-overlay");
+    if (!overlay) return;
+
+    var ovulationDay = data.cycleLength - 14;
+    var fertileStartDay = ovulationDay - 5 - (data.variability || 0);
+    var fertileEndDay = ovulationDay + 1 + (data.variability || 0);
+    fertileStartDay = Math.max(1, fertileStartDay);
+    fertileEndDay = Math.min(data.cycleLength, fertileEndDay);
+
+    var calendarHtml = '<div class="print-calendar">';
+    for (var d = 1; d <= data.cycleLength; d++) {
+      var cls = "print-day";
+      if (d >= fertileStartDay && d <= fertileEndDay) cls += " print-fertile";
+      if (d === ovulationDay) cls += " print-ovulation";
+      calendarHtml += '<span class="' + cls + '">' + d + '</span>';
+    }
+    calendarHtml += "</div>";
+
+    overlay.innerHTML =
+      "<div class=\"print-overlay-inner\">" +
+      "<h1>Fertility Window Summary</h1>" +
+      "<p>Last period: " + data.lmp + "</p>" +
+      "<p>Cycle length: " + data.cycleLength + " days</p>" +
+      "<hr/>" +
+      "<h2>Estimated Ovulation</h2>" +
+      "<p>" + data.ovulationDate + "</p>" +
+      "<h2>Fertile Window</h2>" +
+      "<p>" + data.windowStart + " – " + data.windowEnd + "</p>" +
+      "<hr/>" +
+      calendarHtml +
+      "<p style=\"font-size:12px;color:#555;margin-top:1rem;\">" +
+      "This estimate is based on average cycle patterns and is for educational use only." +
+      "</p>" +
+      "</div>";
   }
 
   if (form) {
@@ -233,9 +322,37 @@
   }
 
   var printBtn = document.getElementById("fertility-print-btn");
+  var printStatus = document.getElementById("fertility-print-status");
   if (printBtn) {
     printBtn.addEventListener("click", function () {
-      window.print();
+      if (lastResult) {
+        if (printStatus) {
+          printStatus.textContent = "Preparing clean print view…";
+          printStatus.hidden = false;
+        }
+        setTimeout(function () {
+          var lmpDate = lmpInput ? new Date(lmpInput.value + "T12:00:00") : null;
+          var resultsData = {
+            lmp: lmpDate ? formatDate(lmpDate) : "",
+            cycleLength: lastResult.cycle,
+            variability: lastResult.variability,
+            ovulationDate: formatDate(lastResult.ovulationDate),
+            windowStart: formatDate(lastResult.startDate),
+            windowEnd: formatDate(lastResult.endDate),
+          };
+          generatePrintOverlay(resultsData);
+          window.print();
+        }, 500);
+      }
     });
   }
+
+  window.addEventListener("afterprint", function () {
+    var overlay = document.getElementById("print-overlay");
+    if (overlay) overlay.innerHTML = "";
+    if (printStatus) {
+      printStatus.textContent = "";
+      printStatus.hidden = true;
+    }
+  });
 })();

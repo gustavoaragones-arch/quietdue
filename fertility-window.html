@@ -20,7 +20,8 @@
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate are fertility window calculators?","acceptedAnswer":{"@type":"Answer","text":"Fertility window calculators use average cycle patterns and cannot predict when ovulation will occur. Cycle length and ovulation timing vary from person to person and month to month. This tool provides an estimate for educational use only, not a guarantee."}},{"@type":"Question","name":"Can this be used as birth control?","acceptedAnswer":{"@type":"Answer","text":"No. This estimator is for educational purposes only and should not be used as a sole method of contraception. For contraception guidance, consult a healthcare provider."}},{"@type":"Question","name":"Does ovulation always happen on day 14?","acceptedAnswer":{"@type":"Answer","text":"No. Ovulation timing varies. Many people have cycles where ovulation occurs around day 14, but cycles and ovulation can vary significantly. This tool uses an average pattern (ovulation approximately 14 days before the next period) as a reference for timing support only."}}]}
   </script>
 </head>
-<body>
+<body class="fertility-page">
+  <div id="print-overlay" class="print-overlay hidden" aria-hidden="true"></div>
   <header class="page-header">
     <a href="/" class="site-brand">QuietDue.com</a>
     <nav aria-label="Main">
@@ -135,13 +136,26 @@
             <span class="fertility-legend-higher">Higher likelihood</span>
           </p>
         </div>
+        <section class="fertility-visualization" aria-labelledby="fertility-visual-heading">
+          <h2 id="fertility-visual-heading">Cycle Timing Overview</h2>
+          <p class="timing-subtext">Fertility likelihood varies throughout the cycle. This visual shows how timing typically shifts around ovulation.</p>
+          <div id="cycle-bar" class="cycle-bar"></div>
+          <p id="cycle-tap-tooltip" class="cycle-tap-tooltip" hidden aria-live="polite"></p>
+          <div class="cycle-legend">
+            <span>Lower likelihood</span>
+            <span>Higher likelihood</span>
+          </div>
+          <p class="visual-disclaimer">This is a simplified cycle timing illustration based on averages. Actual cycles vary from month to month.</p>
+        </section>
         <div class="confidence-block" aria-live="polite">
           <p>Cycle length and ovulation timing vary. This is an estimate based on average patterns, not a prediction.</p>
           <p>Many factors can affect when ovulation occurs. This tool is for educational use only.</p>
         </div>
         <p class="print-actions">
-          <button type="button" class="btn btn-secondary print-fertility-btn" id="fertility-print-btn">Print My Window</button>
+          <button type="button" class="btn btn-secondary print-fertility-btn" id="fertility-print-btn">Generate Printable Summary</button>
         </p>
+        <p id="fertility-print-status" class="print-status" hidden aria-live="polite"></p>
+        <p class="print-privacy-note">Your information is never saved or stored.</p>
       </div>
     </section>
 

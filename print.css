@@ -1,4 +1,115 @@
 /* Print — minimal timeline. Black text. No UI clutter. No metadata. Uses window.print(). */
+
+/* Fertility page: print overlay only — clean white layout, no nav/footer/clutter */
+@media print {
+  body.fertility-page * {
+    visibility: hidden;
+  }
+
+  body.fertility-page #print-overlay,
+  body.fertility-page #print-overlay * {
+    visibility: visible;
+  }
+
+  body.fertility-page #print-overlay {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 700px;
+    padding: 2rem;
+    background: #fff !important;
+    color: #000 !important;
+    box-sizing: border-box;
+  }
+
+  .print-overlay-inner {
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  .print-overlay-title {
+    margin: 0 0 1rem;
+    font-size: 14pt;
+    font-weight: 600;
+  }
+
+  .print-overlay-grid {
+    margin: 0 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.25rem 1.5rem;
+  }
+
+  .print-overlay-grid dt {
+    font-weight: 400;
+    color: #333;
+  }
+
+  .print-overlay-grid dd {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .print-overlay-bar {
+    display: flex;
+    width: 100%;
+    height: 1rem;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    gap: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .print-overlay-lower {
+    background: #ddd !important;
+    min-width: 0;
+  }
+
+  .print-overlay-higher {
+    background: #999 !important;
+    min-width: 0;
+  }
+
+  .print-overlay-legend {
+    margin: 0 0 1rem;
+    font-size: 9pt;
+    color: #666;
+  }
+
+  .print-overlay-note {
+    margin: 0;
+    font-size: 9pt;
+    color: #666;
+  }
+
+  .print-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-top: 1rem;
+  }
+
+  .print-day {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .print-fertile {
+    background: #e8e8e8 !important;
+  }
+
+  .print-ovulation {
+    border: 2px solid #000 !important;
+  }
+}
+
 @media print {
   @page {
     margin: 0.75in;
