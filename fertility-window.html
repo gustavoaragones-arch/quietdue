@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://quietdue.com/fertility-window.html">
   <link rel="alternate" hreflang="x-default" href="https://quietdue.com/fertility-window.html">
   <link rel="manifest" href="/manifest.json">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="print.css" media="print">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/print.css" media="print">
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js", { scope: "/" });
@@ -25,8 +25,14 @@
   <header class="page-header">
     <a href="/" class="site-brand">QuietDue.com</a>
     <nav aria-label="Main">
-      <a href="/">Home</a>
-      <a href="/fertility-window.html">Fertility</a>
+      <details class="nav-dropdown">
+        <summary>Tools</summary>
+        <ul>
+          <li><a href="/">Early Pregnancy Calculator</a></li>
+          <li><a href="/fertility-window.html">Fertility Window</a></li>
+        </ul>
+      </details>
+      <a href="/privacy-and-pregnancy-apps.html">Education</a>
       <a href="/learn/">Learn</a>
       <a href="/about/">About</a>
       <a href="/editorial-policy/">Editorial</a>
@@ -177,12 +183,14 @@
       <p>This tool is for informational and educational purposes only. It does not replace medical advice, contraception counseling, or fertility guidance. Ovulation timing varies—this estimate uses average cycle patterns and is not a guarantee. For questions about your cycle or reproductive health, please consult a healthcare provider.</p>
     </section>
 
-    <!-- Related tools -->
-    <section class="related-tools-section" aria-labelledby="fertility-related-heading">
-      <h2 id="fertility-related-heading">Related Tools</h2>
-      <ul class="related-tools-list">
+    <!-- Related reading -->
+    <section class="related-reading">
+      <h2>Related Reading</h2>
+      <ul>
         <li><a href="/">Early Pregnancy Calculator</a></li>
-        <li><a href="/">Printable Early Timeline</a></li>
+        <li><a href="/privacy-and-pregnancy-apps.html">Privacy &amp; Apps</a></li>
+        <li><a href="/how-accurate-are-due-dates.html">Due Date Accuracy</a></li>
+        <li><a href="/printable-pregnancy-timeline.html">Printable Early Pregnancy Timeline</a></li>
       </ul>
     </section>
   </main>
@@ -203,6 +211,11 @@
     </div>
   </footer>
 
-  <script type="module" src="fertility.js"></script>
+  <script type="module" src="/fertility.js"></script>
+  <noscript>
+    <div class="noscript-fallback" style="padding:var(--space-xl);text-align:center;">
+      <p>This fertility timing tool runs entirely in your browser. Please enable JavaScript.</p>
+    </div>
+  </noscript>
 </body>
 </html>

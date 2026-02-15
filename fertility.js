@@ -8,7 +8,7 @@
 import {
   addDays,
   calculateFertilityWindowExtended,
-} from "./assets/js/timing-engine.js";
+} from "/assets/js/timing-engine.js";
 
 const form = document.getElementById("fertility-form");
 const lmpInput = document.getElementById("fertility-lmp");

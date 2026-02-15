@@ -14,7 +14,7 @@ import {
   addDays,
   calculateDueDate,
   calculateGestationalAge,
-} from "./assets/js/timing-engine.js";
+} from "/assets/js/timing-engine.js";
 
 const CONFIDENCE_DAYS = 12; /* ±12 days (within ±10–14) — reinforces uncertainty framing */
 const IMPLANTATION_START_DAYS = 21; /* approx 3 weeks from LMP */

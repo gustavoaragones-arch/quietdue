@@ -7,9 +7,16 @@
  */
 const CACHE_NAME = "quietdue-v1";
 const STATIC_ASSETS = [
+  "/sitemap.xml",
   "/",
   "/index.html",
   "/fertility-window.html",
+  "/privacy-and-pregnancy-apps.html",
+  "/how-accurate-are-due-dates.html",
+  "/understanding-gestational-weeks.html",
+  "/fertility-window-education.html",
+  "/digital-privacy-health-tools.html",
+  "/printable-pregnancy-timeline.html",
   "/manifest.json",
   "/styles.css",
   "/print.css",
