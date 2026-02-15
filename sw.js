@@ -14,7 +14,8 @@ const STATIC_ASSETS = [
   "/styles.css",
   "/print.css",
   "/app.js",
-  "/fertility.js"
+  "/fertility.js",
+  "/assets/js/timing-engine.js"
 ];
 
 self.addEventListener("install", function (event) {

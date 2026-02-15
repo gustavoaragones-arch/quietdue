@@ -10,14 +10,15 @@
  * - No localStorage
  * - No sessionStorage
  */
-(function () {
-  "use strict";
+import {
+  addDays,
+  calculateDueDate,
+  calculateGestationalAge,
+} from "./assets/js/timing-engine.js";
 
-  const DAYS_IN_GESTATION = 280;
-  const DAYS_IN_WEEK = 7;
-  const CONFIDENCE_DAYS = 12; /* ±12 days (within ±10–14) — reinforces uncertainty framing */
-  const IMPLANTATION_START_DAYS = 21; /* approx 3 weeks from LMP */
-  const IMPLANTATION_END_DAYS = 28;   /* approx 4 weeks from LMP */
+const CONFIDENCE_DAYS = 12; /* ±12 days (within ±10–14) — reinforces uncertainty framing */
+const IMPLANTATION_START_DAYS = 21; /* approx 3 weeks from LMP */
+const IMPLANTATION_END_DAYS = 28;   /* approx 4 weeks from LMP */
 
   const form = document.getElementById("calculator-form");
   const lmpInput = document.getElementById("lmp-date");
@@ -43,17 +44,6 @@
     });
   }
 
-  function addDays(date, days) {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-
-  function daysBetween(start, end) {
-    const diff = end - start;
-    return Math.floor(diff / (1000 * 60 * 60 * 24));
-  }
-
   /**
    * Format gestational age: "about X weeks and Y days (approximate)"
    * Never use clinical shorthand like 6w3d.
@@ -66,13 +56,8 @@
   }
 
   function calculate(lmpDate) {
-    const dueDate = addDays(lmpDate, DAYS_IN_GESTATION);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const daysSinceLMP = daysBetween(lmpDate, today);
-    const gestationalWeeks = Math.max(0, Math.floor(daysSinceLMP / DAYS_IN_WEEK));
-    const gestationalDays = daysSinceLMP % DAYS_IN_WEEK;
+    const dueDate = calculateDueDate(lmpDate);
+    const { weeks: gestationalWeeks, days: gestationalDays } = calculateGestationalAge(lmpDate);
 
     const confidenceEarly = addDays(dueDate, -CONFIDENCE_DAYS);
     const confidenceLate = addDays(dueDate, CONFIDENCE_DAYS);
@@ -376,4 +361,3 @@
   }
   if (btnPrint) btnPrint.addEventListener("click", handlePrint);
   if (btnIcs) btnIcs.addEventListener("click", handleIcs);
-})();

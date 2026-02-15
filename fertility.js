@@ -5,35 +5,31 @@
  * Pure JS only. No API. No Worker. No storage.
  * // Future: allow PDF download generation (client-side only)
  */
-(function () {
-  "use strict";
+import {
+  addDays,
+  calculateFertilityWindowExtended,
+} from "./assets/js/timing-engine.js";
 
-  const form = document.getElementById("fertility-form");
-  const lmpInput = document.getElementById("fertility-lmp");
-  const cycleInput = document.getElementById("fertility-cycle");
-  const variabilityInput = document.getElementById("fertility-variability");
-  const resultsSection = document.getElementById("fertility-results");
-  const ovulationResult = document.getElementById("fertility-ovulation-result");
-  const windowResult = document.getElementById("fertility-window-result");
-  const higherResult = document.getElementById("fertility-higher-result");
-  const lowerResult = document.getElementById("fertility-lower-result");
-  const basedOnResult = document.getElementById("fertility-based-on");
-  const calendarBlock = document.getElementById("fertility-calendar-block");
+const form = document.getElementById("fertility-form");
+const lmpInput = document.getElementById("fertility-lmp");
+const cycleInput = document.getElementById("fertility-cycle");
+const variabilityInput = document.getElementById("fertility-variability");
+const resultsSection = document.getElementById("fertility-results");
+const ovulationResult = document.getElementById("fertility-ovulation-result");
+const windowResult = document.getElementById("fertility-window-result");
+const higherResult = document.getElementById("fertility-higher-result");
+const lowerResult = document.getElementById("fertility-lower-result");
+const basedOnResult = document.getElementById("fertility-based-on");
+const calendarBlock = document.getElementById("fertility-calendar-block");
 
-  const lmpError = document.getElementById("fertility-lmp-error");
-  const cycleError = document.getElementById("fertility-cycle-error");
-  const varError = document.getElementById("fertility-var-error");
-  const printOverlay = document.getElementById("print-overlay");
+const lmpError = document.getElementById("fertility-lmp-error");
+const cycleError = document.getElementById("fertility-cycle-error");
+const varError = document.getElementById("fertility-var-error");
+const printOverlay = document.getElementById("print-overlay");
 
-  var lastResult = null;
+let lastResult = null;
 
-  function addDays(date, days) {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-
-  function formatDate(date) {
+function formatDate(date) {
     return date.toLocaleDateString("en-US", {
       month: "long",
       day: "numeric",
@@ -80,48 +76,7 @@
     setInputInvalid(variabilityInput, false);
   }
 
-  /**
-   * Calculation logic (client-side only, pure JS):
-   * - ovulationDay = cycleLength - 14
-   * - Fertile window: Start = ovulationDay - 5, End = ovulationDay + 1
-   * - If variability: Start -= variability, End += variability
-   * - Clamp to day 1 .. cycleLength
-   * - Higher likelihood: ovulation - 2 through ovulation + 1 (peak fertility)
-   * - Lower likelihood: rest of fertile window (sperm survival days)
-   */
-  function calculate(lmpDate, cycleLength, variability) {
-    var ovulationDay = cycleLength - 14;
-    var fertileStartDay = ovulationDay - 5 - variability;
-    var fertileEndDay = ovulationDay + 1 + variability;
-
-    fertileStartDay = Math.max(1, fertileStartDay);
-    fertileEndDay = Math.min(cycleLength, fertileEndDay);
-
-    var higherStartDay = Math.max(fertileStartDay, ovulationDay - 2);
-    var higherEndDay = Math.min(fertileEndDay, ovulationDay + 1);
-
-    var startDate = addDays(lmpDate, fertileStartDay - 1);
-    var endDate = addDays(lmpDate, fertileEndDay - 1);
-    var ovulationDate = addDays(lmpDate, ovulationDay - 1);
-    var higherStartDate = addDays(lmpDate, higherStartDay - 1);
-    var higherEndDate = addDays(lmpDate, higherEndDay - 1);
-
-    return {
-      startDate: startDate,
-      endDate: endDate,
-      ovulationDate: ovulationDate,
-      higherStartDate: higherStartDate,
-      higherEndDate: higherEndDate,
-      fertileStartDay: fertileStartDay,
-      fertileEndDay: fertileEndDay,
-      higherStartDay: higherStartDay,
-      higherEndDay: higherEndDay,
-      cycle: cycleLength,
-      variability: variability,
-    };
-  }
-
-  function handleSubmit(e) {
+function handleSubmit(e) {
     e.preventDefault();
     clearAllErrors();
     resultsSection.hidden = true;
@@ -172,7 +127,7 @@
     var lmpDate = new Date(lmpVal + "T12:00:00");
     lmpDate.setHours(0, 0, 0, 0);
 
-    var result = calculate(lmpDate, cycleNum, variNum);
+    var result = calculateFertilityWindowExtended(lmpDate, cycleNum, variNum);
 
     if (ovulationResult) {
       ovulationResult.textContent = formatDate(result.ovulationDate);
@@ -284,11 +239,9 @@
     var overlay = document.getElementById("print-overlay");
     if (!overlay) return;
 
-    var ovulationDay = data.cycleLength - 14;
-    var fertileStartDay = ovulationDay - 5 - (data.variability || 0);
-    var fertileEndDay = ovulationDay + 1 + (data.variability || 0);
-    fertileStartDay = Math.max(1, fertileStartDay);
-    fertileEndDay = Math.min(data.cycleLength, fertileEndDay);
+    var fertileStartDay = data.fertileStartDay;
+    var fertileEndDay = data.fertileEndDay;
+    var ovulationDay = data.ovulationDay;
 
     var calendarHtml = '<div class="print-calendar">';
     for (var d = 1; d <= data.cycleLength; d++) {
@@ -339,6 +292,9 @@
             ovulationDate: formatDate(lastResult.ovulationDate),
             windowStart: formatDate(lastResult.startDate),
             windowEnd: formatDate(lastResult.endDate),
+            fertileStartDay: lastResult.fertileStartDay,
+            fertileEndDay: lastResult.fertileEndDay,
+            ovulationDay: lastResult.ovulationDay,
           };
           generatePrintOverlay(resultsData);
           window.print();
@@ -355,4 +311,3 @@
       printStatus.hidden = true;
     }
   });
-})();
