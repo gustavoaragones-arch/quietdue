@@ -36,6 +36,10 @@
   .trust-block,
   .privacy-explanation,
   .privacy-badge,
+  .privacy-block,
+  .fertility-education-section,
+  .related-tools-section,
+  .print-actions,
   .action-buttons,
   .btn,
   .breadcrumb,
@@ -108,6 +112,19 @@
   .calculator-section .confidence-block p {
     color: #333;
     font-size: 10pt;
+  }
+
+  .calculator-section .fertility-calendar-block {
+    margin: 0 0 1rem;
+  }
+
+  .calculator-section .fertility-calendar-bar span {
+    background: #ddd !important;
+    border: 1px solid #999;
+  }
+
+  .calculator-section .fertility-calendar-legend {
+    display: none;
   }
 
   .calculator-section .milestones-framing {

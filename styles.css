@@ -449,9 +449,10 @@ main {
   padding: 0 var(--space-lg) var(--space-3xl);
 }
 
-/* Fallback for pages without .page-content */
+/* Fallback for pages without .page-content (about, learn, etc.) */
 main:not(.page-content) {
   max-width: var(--max-width-reading);
+  padding-top: var(--space-2xl);
 }
 
 /* Calculator results — shown after submission, in memory only. Smooth reveal, no scroll jump. */
@@ -525,6 +526,56 @@ main:not(.page-content) {
 
 .trust-block p + p {
   margin-top: var(--space-sm);
+}
+
+/* Privacy block — Your Privacy Matters (fertility page) */
+.privacy-block {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
+}
+
+.privacy-block h2 {
+  margin: 0 0 var(--space-md);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.privacy-block p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.privacy-block p + p {
+  margin-top: var(--space-sm);
+}
+
+.privacy-block ul {
+  margin: var(--space-md) 0 0;
+  padding-left: 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-loose);
+}
+
+.privacy-block li {
+  margin-bottom: var(--space-xs);
+}
+
+/* Print actions — shown with results */
+.print-actions {
+  margin-top: var(--space-xl) !important;
+  margin-bottom: 0 !important;
+}
+
+.print-actions .btn {
+  margin-top: 0;
 }
 
 /* Calculator — progressive disclosure, empathetic tone */
@@ -603,6 +654,18 @@ main:not(.page-content) {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
   line-height: var(--line-height-body);
+}
+
+/* Inline soft validation — calm tone, no red/green */
+.field-error {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.875rem;
+  color: var(--color-validation);
+  line-height: var(--line-height-body);
+}
+
+.field-error:not([hidden]) {
+  display: block;
 }
 
 /* Optional "Not sure about your dates?" — calm, inline, non-intrusive */
@@ -765,6 +828,102 @@ main:not(.page-content) {
 
 .confidence-block p + p {
   margin-top: var(--space-sm);
+}
+
+/* Fertility window — soft calendar-style visual block */
+.fertility-calendar-block {
+  margin-top: var(--space-xl);
+}
+
+.fertility-calendar-bar {
+  display: flex;
+  width: 100%;
+  height: 1.5rem;
+  background: var(--color-bg);
+  border-radius: 999px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.fertility-calendar-lower {
+  background: rgba(107, 124, 109, 0.06);
+  border-radius: 999px;
+  min-width: 0;
+}
+
+.fertility-calendar-higher {
+  background: var(--color-range-soft);
+  border-radius: 999px;
+  min-width: 0;
+}
+
+.fertility-calendar-legend {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.fertility-legend-lower::before,
+.fertility-legend-higher::before {
+  content: "";
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: var(--space-xs);
+  vertical-align: 0.1em;
+  border-radius: 2px;
+}
+
+.fertility-legend-lower::before {
+  background: rgba(107, 124, 109, 0.2);
+}
+
+.fertility-legend-higher::before {
+  background: var(--color-range-soft);
+}
+
+/* Fertility education section — Understanding Fertility Timing */
+.fertility-education-section {
+  margin-top: var(--section-gap);
+  padding-top: var(--section-gap);
+  border-top: 1px solid var(--color-divider);
+}
+
+.fertility-education-section h2 {
+  margin: 0 0 var(--space-md);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.fertility-education-list {
+  margin: 0 0 var(--space-lg);
+  padding-left: 1.25em;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.fertility-education-list li {
+  margin-bottom: var(--space-sm);
+}
+
+.fertility-education-list li:last-child {
+  margin-bottom: 0;
+}
+
+.fertility-contraception-disclaimer {
+  margin: 0;
+  padding: var(--space-md) var(--space-lg);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+  background-color: var(--color-bg);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-range-soft);
 }
 
 /* Early milestones framing — ranges, no definitive language, paired with reassurance */
@@ -1036,6 +1195,14 @@ main:not(.page-content) {
   gap: var(--space-sm);
 }
 
+.fertility-calculator-section .calc-form {
+  gap: var(--space-2xl);
+}
+
+.fertility-calculator-section .form-group {
+  gap: var(--space-md);
+}
+
 .form-group label {
   font-size: 0.9375rem;
   font-weight: 500;
@@ -1066,6 +1233,36 @@ main:not(.page-content) {
 }
 
 .form-group input[type="date"]:focus-visible {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Number inputs — same large tap target, soft styling as date inputs */
+.form-group input[type="number"] {
+  padding: var(--space-md) var(--space-lg);
+  min-height: var(--tap-target-min);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  -moz-appearance: textfield;
+}
+
+.form-group input[type="number"]::-webkit-outer-spin-button,
+.form-group input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-group input[type="number"]:hover {
+  border-color: #d8d5d0;
+}
+
+.form-group input[type="number"]:focus,
+.form-group input[type="number"]:focus-visible {
   outline: none;
   border-color: var(--color-focus);
   box-shadow: 0 0 0 3px var(--color-focus-ring);
@@ -1312,6 +1509,43 @@ main:not(.page-content) {
 }
 
 /* FAQ — SEO-safe static */
+.related-tools-section {
+  max-width: var(--max-width-reading);
+  margin: 0 auto var(--section-gap);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
+}
+
+.related-tools-section h2 {
+  margin: 0 0 var(--space-md);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.related-tools-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-loose);
+}
+
+.related-tools-list li {
+  margin-bottom: var(--space-sm);
+}
+
+.related-tools-list a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.related-tools-list a:hover {
+  color: var(--color-focus);
+}
+
 .faq-section {
   max-width: var(--max-width-reading);
   margin: 0 auto var(--section-gap);
@@ -1494,6 +1728,7 @@ footer::before {
   .timeline-preview,
   .teaser-block,
   .disclaimer-section,
+  .related-tools-section,
   .faq-section {
     padding: var(--space-2xl);
   }

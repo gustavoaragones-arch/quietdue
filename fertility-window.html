@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private Fertility Window Calculator | QuietDue</title>
+  <meta name="description" content="Estimate your fertile window privately and offline. No tracking. No accounts. Educational cycle-based estimator.">
+  <link rel="canonical" href="https://quietdue.com/fertility-window.html">
+  <link rel="alternate" hreflang="en" href="https://quietdue.com/fertility-window.html">
+  <link rel="alternate" hreflang="x-default" href="https://quietdue.com/fertility-window.html">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="print.css" media="print">
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js", { scope: "/" });
+    }
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate are fertility window calculators?","acceptedAnswer":{"@type":"Answer","text":"Fertility window calculators use average cycle patterns and cannot predict when ovulation will occur. Cycle length and ovulation timing vary from person to person and month to month. This tool provides an estimate for educational use only, not a guarantee."}},{"@type":"Question","name":"Can this be used as birth control?","acceptedAnswer":{"@type":"Answer","text":"No. This estimator is for educational purposes only and should not be used as a sole method of contraception. For contraception guidance, consult a healthcare provider."}},{"@type":"Question","name":"Does ovulation always happen on day 14?","acceptedAnswer":{"@type":"Answer","text":"No. Ovulation timing varies. Many people have cycles where ovulation occurs around day 14, but cycles and ovulation can vary significantly. This tool uses an average pattern (ovulation approximately 14 days before the next period) as a reference for timing support only."}}]}
+  </script>
+</head>
+<body>
+  <header class="page-header">
+    <a href="/" class="site-brand">QuietDue.com</a>
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/fertility-window.html">Fertility</a>
+      <a href="/learn/">Learn</a>
+      <a href="/about/">About</a>
+      <a href="/editorial-policy/">Editorial</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/medical-disclaimer/">Disclaimer</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page-content">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="fertility-hero-heading">
+      <h1 id="fertility-hero-heading">Fertility Window Estimator — Private & Offline</h1>
+      <p class="hero-tagline">Estimate your fertile window using average cycle patterns.</p>
+      <p class="hero-positioning">This tool runs entirely in your browser. Nothing is saved.</p>
+      <p class="trust-signals" style="margin-top: var(--space-md);">No accounts. No tracking. No stored data.</p>
+    </section>
+
+    <!-- What this is / isn't — positioning -->
+    <section class="identity-section" aria-labelledby="fertility-identity-heading">
+      <h2 id="fertility-identity-heading">What this tool is — and isn&rsquo;t</h2>
+      <div class="identity-grid">
+        <div>
+          <h3>Is</h3>
+          <ul>
+            <li>A private, offline fertility window estimator</li>
+            <li>Based on average cycle patterns</li>
+            <li>Educational and informative</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Is not</h3>
+          <ul>
+            <li>A contraception planner</li>
+            <li>Medical advice</li>
+            <li>Ovulation prediction certainty</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy block -->
+    <section class="privacy-block" aria-labelledby="fertility-privacy-heading">
+      <h2 id="fertility-privacy-heading">Your Privacy Matters</h2>
+      <p>This tool runs entirely in your browser.</p>
+      <p>We do not store, track, or transmit your data.</p>
+      <ul>
+        <li>No cookies.</li>
+        <li>No localStorage.</li>
+        <li>No analytics.</li>
+      </ul>
+    </section>
+
+    <!-- Input Section -->
+    <section class="calculator-section fertility-calculator-section" aria-labelledby="fertility-calc-heading">
+      <h2 id="fertility-calc-heading">Estimate your window</h2>
+      <p class="calc-intro">Enter your information below. All calculations happen in your browser. Nothing is saved or sent.</p>
+
+      <form class="calc-form" id="fertility-form" novalidate>
+        <div class="form-group">
+          <label for="fertility-lmp">Last period start date</label>
+          <input type="date" id="fertility-lmp" name="lmp" required aria-describedby="fertility-lmp-helper fertility-lmp-error" aria-invalid="false">
+          <p id="fertility-lmp-helper" class="calc-helper">First day of your most recent period.</p>
+          <p id="fertility-lmp-error" class="field-error" role="alert" aria-live="polite" hidden></p>
+        </div>
+        <div class="form-group">
+          <label for="fertility-cycle">Average cycle length (days)</label>
+          <input type="number" id="fertility-cycle" name="cycle" min="21" max="40" value="28" placeholder="28" required aria-describedby="fertility-cycle-helper fertility-cycle-error" aria-invalid="false">
+          <p id="fertility-cycle-helper" class="calc-helper">Typical length from day 1 of one period to day 1 of the next. Many people have 28-day cycles.</p>
+          <p id="fertility-cycle-error" class="field-error" role="alert" aria-live="polite" hidden></p>
+        </div>
+        <div class="form-group">
+          <label for="fertility-variability">Cycle variability (optional, +/- days)</label>
+          <input type="number" id="fertility-variability" name="variability" min="0" max="7" value="2" placeholder="2" aria-describedby="fertility-var-helper fertility-var-error" aria-invalid="false">
+          <p id="fertility-var-helper" class="calc-helper">How much your cycle length often varies. Leave at 2 if unsure.</p>
+          <p id="fertility-var-error" class="field-error" role="alert" aria-live="polite" hidden></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Estimate window</button>
+      </form>
+      <p id="fertility-date-message" class="calc-date-message" hidden aria-live="polite"></p>
+      <p class="calc-reassurance">Everything stays in your browser. Nothing is saved. You can leave anytime.</p>
+      <p class="trust-signals">Works offline. Nothing saved.</p>
+
+      <!-- Results -->
+      <div class="calc-results" id="fertility-results" hidden aria-live="polite">
+        <h3>Your Estimated Fertility Window</h3>
+        <dl class="results-grid">
+          <dt>Estimated ovulation</dt>
+          <dd id="fertility-ovulation-result"></dd>
+          <dt>Fertile window</dt>
+          <dd id="fertility-window-result"></dd>
+          <dt>Higher likelihood days</dt>
+          <dd id="fertility-higher-result"></dd>
+          <dt>Lower likelihood days</dt>
+          <dd id="fertility-lower-result"></dd>
+          <dt>Based on</dt>
+          <dd id="fertility-based-on"></dd>
+        </dl>
+        <div class="fertility-calendar-block" id="fertility-calendar-block" aria-hidden="true">
+          <div class="fertility-calendar-bar">
+            <span class="fertility-calendar-lower" title="Lower likelihood"></span>
+            <span class="fertility-calendar-higher" title="Higher likelihood"></span>
+            <span class="fertility-calendar-lower fertility-calendar-lower-after" title="Lower likelihood"></span>
+          </div>
+          <p class="fertility-calendar-legend">
+            <span class="fertility-legend-lower">Lower likelihood</span>
+            <span class="fertility-legend-higher">Higher likelihood</span>
+          </p>
+        </div>
+        <div class="confidence-block" aria-live="polite">
+          <p>Cycle length and ovulation timing vary. This is an estimate based on average patterns, not a prediction.</p>
+          <p>Many factors can affect when ovulation occurs. This tool is for educational use only.</p>
+        </div>
+        <p class="print-actions">
+          <button type="button" class="btn btn-secondary print-fertility-btn" id="fertility-print-btn">Print My Window</button>
+        </p>
+      </div>
+    </section>
+
+    <!-- Educational context -->
+    <section class="fertility-education-section" aria-labelledby="fertility-education-heading">
+      <h2 id="fertility-education-heading">Understanding Fertility Timing</h2>
+      <ul class="fertility-education-list">
+        <li>Ovulation typically occurs about 14 days before the next period.</li>
+        <li>Sperm can survive up to 5 days inside the body.</li>
+        <li>Cycles vary month to month.</li>
+        <li>This is an estimate, not a guarantee.</li>
+      </ul>
+      <p class="fertility-contraception-disclaimer">This estimator is for educational purposes only and should not be used as a sole method of contraception.</p>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer-section" aria-labelledby="fertility-disclaimer-heading">
+      <h2 id="fertility-disclaimer-heading">About this estimator</h2>
+      <p>This tool is for informational and educational purposes only. It does not replace medical advice, contraception counseling, or fertility guidance. Ovulation timing varies—this estimate uses average cycle patterns and is not a guarantee. For questions about your cycle or reproductive health, please consult a healthcare provider.</p>
+    </section>
+
+    <!-- Related tools -->
+    <section class="related-tools-section" aria-labelledby="fertility-related-heading">
+      <h2 id="fertility-related-heading">Related Tools</h2>
+      <ul class="related-tools-list">
+        <li><a href="/">Early Pregnancy Calculator</a></li>
+        <li><a href="/">Printable Early Timeline</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="trust-signals trust-signals-footer">No cookies · No analytics · Works offline · Nothing saved</p>
+      <p class="footer-privacy-guarantee">QuietDue does not store or transmit your data.</p>
+      <p class="footer-privacy">Nothing you enter here is saved or shared. Your data stays on your device.</p>
+      <p class="footer-disclaimer">This tool provides estimates for informational purposes only. It is not medical advice.</p>
+      <p class="footer-about"><a href="/about/">About QuietDue</a></p>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/privacy/">Privacy</a>
+        <a href="/medical-disclaimer/">Medical disclaimer</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <p class="copyright">© QuietDue</p>
+    </div>
+  </footer>
+
+  <script src="fertility.js"></script>
+</body>
+</html>

@@ -9,10 +9,12 @@ const CACHE_NAME = "quietdue-v1";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
+  "/fertility-window.html",
   "/manifest.json",
   "/styles.css",
   "/print.css",
-  "/app.js"
+  "/app.js",
+  "/fertility.js"
 ];
 
 self.addEventListener("install", function (event) {
