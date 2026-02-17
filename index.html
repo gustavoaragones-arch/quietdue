@@ -108,7 +108,7 @@
     </section>
 
     <!-- 5. Calculator — progressive disclosure, client-side engine (Phase 1) -->
-    <section class="calculator-section calculator-progressive" aria-labelledby="calc-heading">
+    <section id="calculator" class="calculator-section calculator-progressive" aria-labelledby="calc-heading">
       <h2 id="calc-heading">Calculator</h2>
       <p class="calc-intro">One step at a time. You can stop anytime. Take your time.</p>
 
@@ -131,6 +131,7 @@
 
       <p class="calc-reassurance">Everything stays in your browser. Nothing is saved. You can leave anytime—closing this page erases it.</p>
       <p class="trust-signals">Works offline. Nothing saved.</p>
+      <p class="calc-helper"><a href="/fertility-timing-guide/">Learn how fertility timing works</a></p>
 
       <!-- Results: shown after calculation. All values in memory only. -->
       <div class="calc-results" id="calc-results" hidden aria-live="polite">
@@ -141,20 +142,23 @@
           <dt>Estimated due window</dt>
           <dd class="result-confidence" id="result-confidence"></dd>
         </dl>
-        <div class="results-actions">
+        <div id="print" class="results-actions">
           <button type="button" class="btn btn-primary" data-action="print">Print timeline</button>
           <button type="button" class="btn btn-secondary" data-action="ics">Add to calendar</button>
         </div>
         <p id="action-message" class="calc-action-message" hidden aria-live="polite"></p>
       </div>
 
-      <div class="confidence-preview" id="confidence-preview" aria-hidden="true">
-        <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
-        <div class="confidence-bar" role="presentation">
-          <span class="confidence-range"></span>
+      <div id="probability">
+        <div class="confidence-preview" id="confidence-preview" aria-hidden="true">
+          <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
+          <div class="confidence-bar" role="presentation">
+            <span class="confidence-range"></span>
+          </div>
+          <p class="confidence-label" id="confidence-label">Estimated due window</p>
         </div>
-        <p class="confidence-label" id="confidence-label">Estimated due window</p>
       </div>
+      <p class="calc-helper"><a href="/fertility-timing-guide/">Read the full fertility timing guide</a></p>
 
       <div class="confidence-block" aria-live="polite">
         <p>Early pregnancy dates often shift after the first ultrasound.</p>

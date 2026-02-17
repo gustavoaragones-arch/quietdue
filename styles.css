@@ -540,6 +540,11 @@ main:not(.page-content) {
   padding-top: var(--space-2xl);
 }
 
+/* Guide page — 720px max for calm reading */
+main.guide-page {
+  max-width: 45rem;
+}
+
 /* Calculator results — shown after submission, in memory only. Smooth reveal, no scroll jump. */
 .calc-results {
   margin-top: var(--space-2xl);

@@ -11,6 +11,7 @@ const STATIC_ASSETS = [
   "/",
   "/index.html",
   "/fertility-window.html",
+  "/fertility-timing-guide/",
   "/privacy-and-pregnancy-apps.html",
   "/how-accurate-are-due-dates.html",
   "/understanding-gestational-weeks.html",
