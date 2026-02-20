@@ -17,6 +17,12 @@
     }
   </script>
   <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"QuietDue","url":"https://quietdue.com/","logo":"https://quietdue.com/logo.svg","description":"QuietDue is a privacy-first reproductive timing and fertility awareness utility providing informational cycle timing estimates without storing personal data."}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"QuietDue","url":"https://quietdue.com/","publisher":{"@type":"Organization","name":"QuietDue"}}
+  </script>
+  <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is QuietDue private?","acceptedAnswer":{"@type":"Answer","text":"Yes. QuietDue runs entirely in your browser. It does not create accounts, use trackers, store your inputs, or sync to the cloud. Closing the page erases everything."}},{"@type":"Question","name":"Does this calculator save my data?","acceptedAnswer":{"@type":"Answer","text":"No. Nothing is saved. Your dates and results stay on your device and are never sent to a server."}},{"@type":"Question","name":"How accurate are early due dates?","acceptedAnswer":{"@type":"Answer","text":"Early pregnancy dating is imprecise. Cycle length and ovulation timing vary. Ultrasound may change estimates. This tool provides an approximate window, not a definitive date."}},{"@type":"Question","name":"Can I use this without creating an account?","acceptedAnswer":{"@type":"Answer","text":"Yes. No account is required. You can use the calculator immediately without signing up or logging in."}},{"@type":"Question","name":"Does QuietDue work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once the page loads, the calculator runs entirely in your browser and works without an internet connection."}},{"@type":"Question","name":"Is this medical advice?","acceptedAnswer":{"@type":"Answer","text":"No. QuietDue provides estimates for informational purposes only. It does not replace advice from a healthcare provider."}}]}
   </script>
 </head>
@@ -36,7 +42,7 @@
       <a href="/about/">About</a>
       <a href="/editorial-policy/">Editorial</a>
       <a href="/privacy/">Privacy</a>
-      <a href="/medical-disclaimer/">Disclaimer</a>
+      <a href="/disclaimer/">Disclaimer</a>
       <a href="/contact/">Contact</a>
     </nav>
   </header>
@@ -52,62 +58,7 @@
       </div>
     </section>
 
-    <!-- 2. Explicit: what we do NOT collect -->
-    <section class="data-section" aria-labelledby="data-heading">
-      <h2 id="data-heading">What we don&rsquo;t collect</h2>
-      <p>We don&rsquo;t need anything from you to use QuietDue. Here&rsquo;s what we explicitly do not collect, store, or use:</p>
-      <ul class="data-list">
-        <li>No names, emails, or accounts</li>
-        <li>No dates you enter or results you see</li>
-        <li>No tracking, analytics, or cookies</li>
-        <li>No cloud sync or data sharing</li>
-      </ul>
-      <p class="data-closing">Everything runs in your browser. Closing this page erases everything. We believe your information about your body should stay yours until you decide otherwise.</p>
-    </section>
-
-    <!-- 3. Early pregnancy context — empathetic -->
-    <section class="context-section" aria-labelledby="context-heading">
-      <h2 id="context-heading">Early pregnancy is uncertain by nature</h2>
-      <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
-      <p>Dates shift. Cycle length and ovulation timing vary from person to person. What we call &ldquo;week 6&rdquo; today might be recalculated after more information is available. That&rsquo;s normal.</p>
-      <p>Early ultrasounds often change estimates. Measurements in the first trimester can differ from dates based on your last period—and providers may adjust your due date accordingly. It doesn&rsquo;t mean anything went wrong; it just means early pregnancy dating is imprecise.</p>
-      <p>Week numbers can feel confusing. Different sources count differently. This tool gives you a best estimate so you can orient yourself—without pretending it&rsquo;s exact.</p>
-
-      <details class="meaning-callout">
-        <summary>What this means / What it doesn&rsquo;t mean</summary>
-        <div class="meaning-callout-content">
-          <p><strong>What this means:</strong> Uncertainty is normal. Dates often get refined as more information becomes available. That&rsquo;s expected, not a sign of a problem.</p>
-          <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t mean you&rsquo;re doing something wrong or that anything is wrong with your pregnancy. It simply reflects how early dating works.</p>
-        </div>
-      </details>
-    </section>
-
-    <!-- 4. What this is / what this is not -->
-    <section class="identity-section" aria-labelledby="identity-heading">
-      <h2 id="identity-heading">What QuietDue is — and isn&rsquo;t</h2>
-      <div class="identity-grid">
-        <div>
-          <h3>Is</h3>
-          <ul>
-            <li>Private</li>
-            <li>Offline</li>
-            <li>Informational</li>
-            <li>Quiet</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Is not</h3>
-          <ul>
-            <li>A tracker</li>
-            <li>A social app</li>
-            <li>A data-collecting service</li>
-            <li>A replacement for medical care</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. Calculator — progressive disclosure, client-side engine (Phase 1) -->
+    <!-- 2. Calculator — directly below hero for above-the-fold on mobile -->
     <section id="calculator" class="calculator-section calculator-progressive" aria-labelledby="calc-heading">
       <h2 id="calc-heading">Calculator</h2>
       <p class="calc-intro">One step at a time. You can stop anytime. Take your time.</p>
@@ -193,7 +144,62 @@
       </details>
     </section>
 
-    <!-- 5b. Printable timeline preview (no download yet) -->
+    <!-- 3. Explicit: what we do NOT collect -->
+    <section class="data-section" aria-labelledby="data-heading">
+      <h2 id="data-heading">What we don&rsquo;t collect</h2>
+      <p>We don&rsquo;t need anything from you to use QuietDue. Here&rsquo;s what we explicitly do not collect, store, or use:</p>
+      <ul class="data-list">
+        <li>No names, emails, or accounts</li>
+        <li>No dates you enter or results you see</li>
+        <li>No tracking, analytics, or cookies</li>
+        <li>No cloud sync or data sharing</li>
+      </ul>
+      <p class="data-closing">Everything runs in your browser. Closing this page erases everything. We believe your information about your body should stay yours until you decide otherwise.</p>
+    </section>
+
+    <!-- 3. Early pregnancy context — empathetic -->
+    <section class="context-section" aria-labelledby="context-heading">
+      <h2 id="context-heading">Early pregnancy is uncertain by nature</h2>
+      <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
+      <p>Dates shift. Cycle length and ovulation timing vary from person to person. What we call &ldquo;week 6&rdquo; today might be recalculated after more information is available. That&rsquo;s normal.</p>
+      <p>Early ultrasounds often change estimates. Measurements in the first trimester can differ from dates based on your last period—and providers may adjust your due date accordingly. It doesn&rsquo;t mean anything went wrong; it just means early pregnancy dating is imprecise.</p>
+      <p>Week numbers can feel confusing. Different sources count differently. This tool gives you a best estimate so you can orient yourself—without pretending it&rsquo;s exact.</p>
+
+      <details class="meaning-callout">
+        <summary>What this means / What it doesn&rsquo;t mean</summary>
+        <div class="meaning-callout-content">
+          <p><strong>What this means:</strong> Uncertainty is normal. Dates often get refined as more information becomes available. That&rsquo;s expected, not a sign of a problem.</p>
+          <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t mean you&rsquo;re doing something wrong or that anything is wrong with your pregnancy. It simply reflects how early dating works.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- 4. What this is / what this is not -->
+    <section class="identity-section" aria-labelledby="identity-heading">
+      <h2 id="identity-heading">What QuietDue is — and isn&rsquo;t</h2>
+      <div class="identity-grid">
+        <div>
+          <h3>Is</h3>
+          <ul>
+            <li>Private</li>
+            <li>Offline</li>
+            <li>Informational</li>
+            <li>Quiet</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Is not</h3>
+          <ul>
+            <li>A tracker</li>
+            <li>A social app</li>
+            <li>A data-collecting service</li>
+            <li>A replacement for medical care</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Printable timeline preview (no download yet) -->
     <section class="timeline-preview" aria-labelledby="timeline-heading">
       <h2 id="timeline-heading">Your timeline</h2>
       <p class="timeline-preview-intro">After you see your estimate, you&rsquo;ll be able to print a one-page timeline—or save it for offline. No account required.</p>
@@ -247,15 +253,18 @@
       </details>
     </section>
 
-    <!-- 6b. Related reading -->
+    <!-- Related reading — fertility timing authority, centered in main column -->
     <section class="related-reading">
-      <h2>Related Reading</h2>
+      <h2>Learn More About Fertility Timing</h2>
+      <p>Explore structured explanations about ovulation timing, cycle variability, and how fertility window estimates are calculated.</p>
       <ul>
-        <li><a href="/fertility-window.html">Fertility Window Tool</a></li>
-        <li><a href="/privacy-and-pregnancy-apps.html">Privacy &amp; Apps</a></li>
-        <li><a href="/how-accurate-are-due-dates.html">Due Date Accuracy</a></li>
-        <li><a href="/printable-pregnancy-timeline.html">Printable Early Pregnancy Timeline</a></li>
+        <li><a href="/fertility-timing-guide/stress-and-ovulation/">Does Stress Affect Ovulation Timing?</a></li>
+        <li><a href="/fertility-timing-guide/is-day-14-ovulation/">Is Ovulation Always on Day 14?</a></li>
+        <li><a href="/fertility-timing-guide/can-ovulation-change-each-month/">Can Ovulation Change Each Month?</a></li>
+        <li><a href="/fertility-timing-guide/luteal-phase-length/">What Is Luteal Phase Length?</a></li>
+        <li><a href="/fertility-timing-guide/irregular-cycles-ovulation/">Can You Ovulate With Irregular Cycles?</a></li>
       </ul>
+      <p><a href="/fertility-timing-guide/">Fertility Timing Guide</a> · <a href="/fertility-window.html">Fertility Window Calculator</a></p>
     </section>
 
     <!-- 7. Static FAQ -->
@@ -278,21 +287,15 @@
     </section>
   </main>
 
-  <!-- 8. Minimal, respectful footer -->
   <footer>
-    <div class="footer-inner">
-      <p class="trust-signals trust-signals-footer">No cookies · No analytics · Works offline · Nothing saved</p>
-      <p class="footer-privacy-guarantee">QuietDue does not store or transmit your data.</p>
-      <p class="footer-privacy">Nothing you enter here is saved or shared. Your data stays on your device.</p>
-      <p class="footer-disclaimer">This tool provides estimates for informational purposes only. It is not medical advice.</p>
-      <p class="footer-about"><a href="/about/">About QuietDue</a></p>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="/privacy/">Privacy</a>
-        <a href="/medical-disclaimer/">Medical disclaimer</a>
-        <a href="/contact/">Contact</a>
-      </nav>
-      <p class="copyright">© QuietDue</p>
-    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/fertility-timing-guide/">Fertility Timing Guide</a>
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/disclaimer/">Disclaimer</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <p class="copyright">© 2026 QuietDue</p>
   </footer>
 
   <script type="module" src="app.js"></script>

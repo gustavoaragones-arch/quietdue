@@ -260,6 +260,13 @@ header {
   margin-bottom: var(--space-lg);
 }
 
+.last-reviewed {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin: -0.75rem 0 var(--space-lg);
+  font-weight: var(--font-weight-normal);
+}
+
 .article-content h2 {
   margin: var(--space-xl) 0 var(--space-md);
   font-size: 1rem;
@@ -317,27 +324,38 @@ header {
   color: var(--color-accent);
 }
 
-/* Related reading — standardized footer section on content pages */
+/* Related reading — centered in main column, no float/sidebar */
 .related-reading {
-  margin-top: var(--space-2xl);
-  padding-top: var(--space-xl);
-  border-top: 1px solid var(--color-border);
+  margin-top: 48px;
+  padding: 24px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  max-width: var(--max-width-reading);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .related-reading h2 {
   font-size: 1rem;
   font-weight: 500;
+  color: var(--color-text);
+  margin: 0 0 var(--space-md);
+}
+
+.related-reading p {
+  margin: 0 0 var(--space-md);
+  font-size: 0.9375rem;
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-md);
+  line-height: var(--line-height-body);
 }
 
 .related-reading ul {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
 }
 
 .related-reading li {
-  margin-bottom: var(--space-sm);
+  margin-bottom: 12px;
 }
 
 .related-reading a {
@@ -355,6 +373,22 @@ header {
   margin: 0 auto var(--section-gap);
   padding: var(--space-3xl) var(--space-lg) var(--space-xl);
   text-align: center;
+}
+
+/* Homepage: calculator directly below hero — minimal gap so calculator is above the fold on mobile */
+.page-content > .hero {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+.page-content > .hero + .calculator-section {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .page-content > .hero {
+    padding: var(--space-xl) var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-md);
+  }
 }
 
 .hero-tagline {
@@ -1815,10 +1849,10 @@ main.guide-page {
   padding-left: 0;
 }
 
-/* Footer — quiet, minimal. Full-width bar, content centered. */
+/* Footer — centered, small font, soft color, generous top margin. No sticky. */
 footer {
   position: relative;
-  margin-top: var(--space-3xl);
+  margin-top: 4rem;
   padding: var(--space-2xl) var(--space-lg);
   text-align: center;
 }
@@ -1879,7 +1913,7 @@ footer::before {
 }
 
 .footer-links {
-  margin: var(--space-sm) 0 0;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -1900,11 +1934,11 @@ footer::before {
   color: var(--color-text);
 }
 
-.copyright {
+footer .copyright {
   margin: var(--space-md) 0 0;
   font-size: 0.75rem;
   color: var(--color-text-secondary);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* Legacy: other pages may use .disclaimer */
