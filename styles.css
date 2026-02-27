@@ -13,6 +13,10 @@
    PRIVACY GUARANTEE: No analytics script. No cookies banner. No fetch().
    No localStorage. No sessionStorage. */
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* Color — off-white page, warmer content panels. Subtle contrast. */
   --color-bg: #f3f2ef;

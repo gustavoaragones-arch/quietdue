@@ -10,7 +10,6 @@ const STATIC_ASSETS = [
   "/sitemap.xml",
   "/",
   "/index.html",
-  "/fertility-window.html",
   "/fertility-timing-guide/",
   "/fertility-timing-guide/stress-and-ovulation/",
   "/fertility-timing-guide/is-day-14-ovulation/",
