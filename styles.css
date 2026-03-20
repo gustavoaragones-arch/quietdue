@@ -406,6 +406,77 @@ header {
   margin-bottom: 10px;
 }
 
+/* Phase 9 — AEO: extractable direct answers and structured summaries */
+.direct-answer {
+  background: #f7f7f7;
+  border-left: 3px solid #3a3632;
+  padding: 16px;
+  margin: 16px 0 24px 0;
+}
+
+.key-takeaways {
+  margin: 32px 0;
+}
+
+.key-takeaways ul {
+  padding-left: 18px;
+}
+
+.site-identity {
+  margin: 1rem auto 0;
+  max-width: 42rem;
+  padding: 0 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.how-this-works {
+  margin: 28px 0;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+}
+
+.how-this-works h2 {
+  margin-top: 0;
+  font-size: 1.125rem;
+}
+
+.how-this-works p {
+  margin-bottom: 0;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* Phase 9.5 — AEO hardening: definition anchor, scope, limitation */
+.definition-line {
+  color: #666;
+  font-size: 0.95rem;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+
+.content-limitation {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 1.75rem 0 0;
+  padding: 12px 14px;
+  border-left: 2px solid var(--color-border);
+  background: rgba(250, 249, 246, 0.8);
+}
+
+.coverage-note {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0 0 1.25rem;
+  max-width: var(--max-width-reading);
+}
+
 /* Hero — trust-first, privacy statement. Wider on desktop. */
 .hero {
   max-width: var(--max-width-wide);
