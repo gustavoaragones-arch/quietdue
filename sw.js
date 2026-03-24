@@ -5,7 +5,7 @@
  * data is ever transmitted. App code (app.js) does NOT use fetch/localStorage/
  * sessionStorage/cookies.
  */
-const CACHE_NAME = "quietdue-v1";
+const CACHE_NAME = "quietdue-v2";
 const STATIC_ASSETS = [
   "/sitemap.xml",
   "/",
@@ -28,6 +28,7 @@ const STATIC_ASSETS = [
   "/fertility-timing-guide/travel-and-cycle-timing/",
   "/fertility-timing-guide/cycle-length-variation/",
   "/about/",
+  "/education/",
   "/privacy/",
   "/disclaimer/",
   "/contact/",

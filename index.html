@@ -17,10 +17,10 @@
     }
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"QuietDue","url":"https://quietdue.com/","logo":"https://quietdue.com/logo.svg","description":"QuietDue is a privacy-first reproductive timing and fertility awareness utility providing informational cycle timing estimates without storing personal data."}
+  {"@context":"https://schema.org","@type":"Organization","name":"QuietDue","url":"https://quietdue.com/","logo":"https://quietdue.com/logo.svg","parentOrganization":{"@type":"Organization","name":"Albor Digital LLC"},"description":"QuietDue is a privacy-first reproductive timing and fertility awareness utility operated by Albor Digital LLC, providing informational cycle timing estimates without storing personal data."}
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","name":"QuietDue","url":"https://quietdue.com/","publisher":{"@type":"Organization","name":"QuietDue"}}
+  {"@context":"https://schema.org","@type":"WebSite","name":"QuietDue","url":"https://quietdue.com/","publisher":{"@type":"Organization","name":"QuietDue","parentOrganization":{"@type":"Organization","name":"Albor Digital LLC"}}}
   </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is QuietDue private?","acceptedAnswer":{"@type":"Answer","text":"Yes. QuietDue runs entirely in your browser. It does not create accounts, use trackers, store your inputs, or sync to the cloud. Closing the page erases everything."}},{"@type":"Question","name":"Does this calculator save my data?","acceptedAnswer":{"@type":"Answer","text":"No. Nothing is saved. Your dates and results stay on your device and are never sent to a server."}},{"@type":"Question","name":"How accurate are early due dates?","acceptedAnswer":{"@type":"Answer","text":"Early pregnancy dating is imprecise. Cycle length and ovulation timing vary. Ultrasound may change estimates. This tool provides an approximate window, not a definitive date."}},{"@type":"Question","name":"Can I use this without creating an account?","acceptedAnswer":{"@type":"Answer","text":"Yes. No account is required. You can use the calculator immediately without signing up or logging in."}},{"@type":"Question","name":"Does QuietDue work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once the page loads, the calculator runs entirely in your browser and works without an internet connection."}},{"@type":"Question","name":"Is this medical advice?","acceptedAnswer":{"@type":"Answer","text":"No. QuietDue provides estimates for informational purposes only. It does not replace advice from a healthcare provider."}}]}
@@ -37,7 +37,7 @@
           <li><a href="/#calculator">Fertility Window</a></li>
         </ul>
       </details>
-      <a href="/privacy-and-pregnancy-apps.html">Education</a>
+      <a href="/education/">Education</a>
       <a href="/learn/">Learn</a>
       <a href="/about/">About</a>
       <a href="/editorial-policy/">Editorial</a>
@@ -284,6 +284,10 @@
       </ul>
     </section>
 
+    <p>
+      For structured explanations of fertility timing concepts, visit the <a href="/education/">Education section</a>.
+    </p>
+
     <!-- 7. Static FAQ -->
     <section class="faq-section" aria-labelledby="faq-heading">
       <h2 id="faq-heading">Frequently asked questions</h2>
@@ -312,8 +316,8 @@
       <a href="/disclaimer/">Disclaimer</a>
       <a href="/contact/">Contact</a>
     </nav>
-    <p class="site-identity">QuietDue is a privacy-first fertility timing resource providing informational cycle estimates without storing personal data.</p>
-    <p class="copyright">© 2026 QuietDue</p>
+    <p class="site-identity">QuietDue is a privacy-first fertility timing resource operated by Albor Digital LLC, an independent digital product studio.</p>
+    <p class="legal-entity">© 2026 Albor Digital LLC · Wyoming, USA</p>
   </footer>
 
   <script type="module" src="app.js"></script>
