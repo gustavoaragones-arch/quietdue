@@ -5,7 +5,7 @@
  * data is ever transmitted. App code (app.js) does NOT use fetch/localStorage/
  * sessionStorage/cookies.
  */
-const CACHE_NAME = "quietdue-v2";
+const CACHE_NAME = "quietdue-v3";
 const STATIC_ASSETS = [
   "/sitemap.xml",
   "/",
@@ -40,6 +40,7 @@ const STATIC_ASSETS = [
   "/printable-pregnancy-timeline.html",
   "/manifest.json",
   "/logo.svg",
+  "/assets/logo.png",
   "/styles.css",
   "/print.css",
   "/app.js",
@@ -75,24 +76,58 @@ self.addEventListener("activate", function (event) {
   );
 });
 
+function sameOrigin(url) {
+  try {
+    return new URL(url).origin === self.location.origin;
+  } catch (e) {
+    return false;
+  }
+}
+
+/** CSS/JS: network-first so style and script edits show up; cache as fallback offline. */
+function isStylesheetOrScript(request) {
+  if (request.method !== "GET" || !sameOrigin(request.url)) return false;
+  try {
+    return /\.(css|js)$/.test(new URL(request.url).pathname);
+  } catch (e) {
+    return false;
+  }
+}
+
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET") return;
   if (event.request.url.includes("formspree") || event.request.url.includes("api")) return;
 
   event.respondWith(
-    caches.match(event.request).then(function (cached) {
+    (async function () {
+      if (isStylesheetOrScript(event.request)) {
+        const cached = await caches.match(event.request);
+        try {
+          const response = await fetch(event.request);
+          if (response.status === 200) {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put(event.request, response.clone());
+          }
+          return response;
+        } catch (e) {
+          if (cached) return cached;
+          return caches.match("/") || caches.match("/index.html");
+        }
+      }
+
+      const cached = await caches.match(event.request);
       if (cached) return cached;
-      return fetch(event.request).then(function (response) {
+      try {
+        const response = await fetch(event.request);
         const clone = response.clone();
         if (response.status === 200 && event.request.url.startsWith(self.location.origin)) {
-          caches.open(CACHE_NAME).then(function (cache) {
-            cache.put(event.request, clone);
-          });
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(event.request, clone);
         }
         return response;
-      }).catch(function () {
+      } catch (e) {
         return caches.match("/") || caches.match("/index.html");
-      });
-    })
+      }
+    })()
   );
 });

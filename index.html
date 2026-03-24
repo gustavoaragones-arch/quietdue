@@ -60,14 +60,15 @@
 
     <!-- 2. Calculator — directly below hero for above-the-fold on mobile -->
     <section id="calculator" class="calculator-section calculator-progressive" aria-labelledby="calc-heading">
+      <div class="calculator-card">
       <h2 id="calc-heading">Calculator</h2>
-      <p class="calc-intro">One step at a time. You can stop anytime. Take your time.</p>
+      <p class="calculator-intro">One step at a time. You can stop anytime. Take your time.</p>
 
       <form class="calc-form" id="calculator-form" novalidate>
         <div class="calc-step calc-step-current">
           <label for="lmp-date">First day of your last menstrual period</label>
           <input type="date" id="lmp-date" name="lmp-date" aria-describedby="calc-helper">
-          <p id="calc-helper" class="calc-helper">You don&rsquo;t need to be exact. Estimates are okay.</p>
+          <p id="calc-helper" class="helper-text">You don&rsquo;t need to be exact. Estimates are okay.</p>
           <details class="calc-uncertainty" id="calc-optional">
             <summary>Not sure about your dates?</summary>
             <p>Many people aren&rsquo;t. You can use your best guess—your provider will help refine it when you have more information. There&rsquo;s no wrong way to start.</p>
@@ -142,6 +143,7 @@
           <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t mean anything is wrong. It&rsquo;s not a diagnosis. Your provider may use different dates after an ultrasound—that&rsquo;s normal.</p>
         </div>
       </details>
+      </div>
     </section>
 
     <!-- 3. Explicit: what we do NOT collect -->
@@ -288,9 +290,11 @@
       </div>
     </section>
 
-    <p>
-      For structured explanations of fertility timing concepts, visit the <a href="/education/">Education section</a>.
-    </p>
+    <div class="container home-education-callout">
+      <p>
+        For structured explanations of fertility timing concepts, visit the <a href="/education/">Education section</a>.
+      </p>
+    </div>
 
     <!-- 7. Static FAQ -->
     <section class="faq-section" aria-labelledby="faq-heading">

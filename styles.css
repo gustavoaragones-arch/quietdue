@@ -537,6 +537,17 @@ header {
   margin-bottom: 10px;
 }
 
+/* Homepage — Education callout aligned with guide + FAQ column */
+.home-education-callout {
+  margin-top: 12px;
+}
+
+.home-education-callout p {
+  margin-bottom: 0;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
 /* === CARD SYSTEM === */
 .card {
   background: var(--bg-soft);
@@ -843,7 +854,7 @@ main.guide-page {
 .calc-results {
   margin-top: var(--space-2xl);
   padding-top: var(--space-xl);
-  border-top: 1px solid var(--color-divider);
+  border-top: 1px solid var(--border-soft);
 }
 
 .calc-results:not([hidden]) {
@@ -983,28 +994,104 @@ main.guide-page {
   display: none;
 }
 
+/* === FORM INPUT SYSTEM === */
+input[type="date"],
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 14px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 1px solid #e5e2df;
+  border-radius: 8px;
+  background: #fff;
+  color: #3a3632;
+  outline: none;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+input:focus {
+  border-color: #3a3632;
+  box-shadow: 0 0 0 2px rgba(58, 54, 50, 0.08);
+}
+
+input::placeholder {
+  color: #a39a93;
+}
+
+/* === FORM LABELS === */
+label {
+  display: block;
+  font-size: 14px;
+  color: #6b625b;
+  margin-bottom: 6px;
+}
+
+.helper-text {
+  font-size: 13px;
+  color: #8a817a;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
 /* Calculator — progressive disclosure, empathetic tone */
 .calculator-section {
   max-width: var(--max-width-wide);
   margin: 0 auto var(--section-gap);
-  padding: var(--space-xl);
-  background-color: var(--color-surface);
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* === CALCULATOR CARD === */
+.calculator-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-subtle);
+  padding: 28px 24px;
+  margin-top: 24px;
 }
 
-.calculator-progressive h2 {
-  margin: 0 0 var(--space-sm);
-  font-size: 1.125rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text);
+.calculator-card > * + * {
+  margin-top: 18px;
 }
 
-.calc-intro {
-  margin: 0 0 var(--space-lg);
-  font-size: 0.9375rem;
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-body);
+.calculator-card > h2:first-child {
+  margin-top: 0;
+}
+
+.calculator-card h2 + p {
+  margin-top: 0;
+}
+
+.calculator-card .calculator-intro + .calc-form {
+  margin-top: 0;
+}
+
+.calculator-progressive h2,
+.calculator-card h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.calculator-intro {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  margin-top: 0;
+  line-height: 1.65;
 }
 
 .calc-form {
@@ -1021,44 +1108,22 @@ main.guide-page {
 }
 
 .calc-step label {
-  font-size: 0.9375rem;
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text);
+  font-weight: 500;
 }
 
-.calc-step input[type="date"] {
-  padding: var(--space-md) var(--space-lg);
+.calc-form input[type="date"] {
   min-height: var(--tap-target-min);
-  font-family: inherit;
-  font-size: 1rem; /* 16px prevents iOS zoom on focus */
-  color: var(--color-text);
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  -webkit-appearance: none;
-  appearance: none;
-  transition: border-color var(--transition-soft), box-shadow var(--transition-soft);
 }
 
-.calc-step input[type="date"]:hover {
-  border-color: #d8d5d0;
-}
-
-.calc-step input[type="date"]:focus {
-  outline: none;
-  border-color: var(--color-focus);
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
-}
-
-.calc-step input[type="date"]:focus-visible {
-  outline: none;
+.calculator-card .btn {
+  margin-top: 16px;
 }
 
 .calc-helper {
-  margin: 0;
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  line-height: var(--line-height-body);
+  margin: 1rem 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
 }
 
 /* Inline soft validation — calm tone, no red/green */
@@ -1167,8 +1232,7 @@ main.guide-page {
   font-style: italic;
 }
 
-/* Confidence window visualization — soft bars, shaded ranges, no sharp markers.
-   Visual normalization of uncertainty: gradient suggests range, not a point. */
+/* Confidence window visualization — flat bar, soft fill, no gradient */
 .confidence-preview {
   margin-top: var(--space-2xl);
   padding-top: var(--space-xl);
@@ -1198,14 +1262,7 @@ main.guide-page {
   right: 12%;
   top: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(107, 124, 109, 0.04) 0%,
-    rgba(107, 124, 109, 0.14) 25%,
-    rgba(107, 124, 109, 0.18) 50%,
-    rgba(107, 124, 109, 0.14) 75%,
-    rgba(107, 124, 109, 0.04) 100%
-  );
+  background: rgba(107, 124, 109, 0.14);
   border-radius: 999px;
 }
 
@@ -1219,9 +1276,9 @@ main.guide-page {
 .confidence-block {
   margin-top: var(--space-xl);
   padding: var(--space-lg);
-  background-color: var(--color-bg);
+  background-color: var(--bg-soft);
   border-radius: var(--radius-sm);
-  border-left: 3px solid var(--color-range-soft);
+  border: 1px solid var(--border-soft);
 }
 
 .confidence-block p {
@@ -2264,7 +2321,6 @@ footer .copyright {
   .data-section,
   .context-section,
   .identity-section,
-  .calculator-section,
   .calculator-placeholder,
   .timeline-preview,
   .teaser-block,
