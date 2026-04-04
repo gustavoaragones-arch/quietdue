@@ -558,6 +558,7 @@ header {
 
 /* Phase 9 — AEO: extractable direct answers and structured summaries */
 .direct-answer,
+.intent-clarifier,
 .key-takeaways,
 .faq-section,
 .guide-index-inner {
@@ -570,6 +571,24 @@ header {
   padding: 20px;
   margin: 16px 0 24px 0;
   border-left: 3px solid var(--text-primary);
+}
+
+.intent-clarifier {
+  padding: 20px;
+  margin: 0 0 20px 0;
+}
+
+.intent-clarifier h2 {
+  margin: 0 0 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.intent-clarifier p {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--text-secondary);
 }
 
 .key-takeaways {

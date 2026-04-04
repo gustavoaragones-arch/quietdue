@@ -150,7 +150,7 @@ def add_footer_identity(html: str) -> str:
         return html
     return html.replace(
         '<p class="copyright">© 2026 QuietDue</p>',
-        '<p class="site-identity">QuietDue is a privacy-first fertility timing resource operated by Albor Digital LLC, an independent digital product studio.</p>\n    <p class="legal-entity">© 2026 Albor Digital LLC · Wyoming, USA</p>',
+        '<p class="site-identity">QuietDue is a privacy-first fertility timing resource operated by Albor Digital LLC</p>\n    <p class="legal-entity">© 2026 Albor Digital LLC · Wyoming, USA</p>',
         1,
     )
 
