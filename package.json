@@ -1,0 +1,9 @@
+{
+  "name": "quietdue",
+  "private": true,
+  "description": "Static site — local preview only",
+  "scripts": {
+    "dev": "python3 -m http.server 8765",
+    "dev:serve": "npx --yes serve@14 . -p 8765"
+  }
+}
