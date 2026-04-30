@@ -144,6 +144,10 @@
   .disclaimer-section,
   .disclaimer-block,
   .faq-section,
+  .trust,
+  .interpretation,
+  .secondary-collapsed,
+  .related,
   .trust-block,
   .privacy-explanation,
   .privacy-badge,
@@ -156,33 +160,21 @@
   .breadcrumb,
   .link-cta,
   .footer-links,
-  footer {
+  footer,
+  .tool-primary {
     display: none !important;
   }
 
-  .calculator-section .calc-form,
-  .calculator-section .calc-date-message,
-  .calculator-section .calc-reassurance,
-  .calculator-section .trust-signals,
-  .calculator-section .confidence-preview,
-  .calculator-section .meaning-callout,
-  .calculator-section .results-actions {
+  .result .results-actions,
+  .result .confidence-preview {
     display: none !important;
   }
 
-  .calculator-section {
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    max-width: 100% !important;
-  }
-
-  .calculator-section .calc-results[hidden] {
+  .result.calc-results[hidden] {
     display: none !important;
   }
 
-  .calculator-section .calc-results:not([hidden]) {
+  .result.calc-results:not([hidden]) {
     display: block !important;
     visibility: visible !important;
     padding: 0;
@@ -190,28 +182,29 @@
     border: none;
   }
 
-  .calculator-section .calc-results h3 {
+  .result.calc-results h2,
+  .result.calc-results h3 {
     font-size: 12pt;
     font-weight: 600;
     margin: 0 0 0.5rem;
     color: #000;
   }
 
-  .calculator-section .results-grid {
+  .result .results-grid {
     margin: 0 0 1rem;
   }
 
-  .calculator-section .results-grid dt {
+  .result .results-grid dt {
     color: #333;
     font-weight: 400;
   }
 
-  .calculator-section .results-grid dd {
+  .result .results-grid dd {
     color: #000;
     font-weight: 500;
   }
 
-  .calculator-section .confidence-block {
+  .result .confidence-block {
     display: block !important;
     margin: 0 0 1rem;
     padding: 0.5rem 0;
@@ -220,59 +213,45 @@
     padding-left: 0.75rem;
   }
 
-  .calculator-section .confidence-block p {
+  .result .confidence-block p {
     color: #333;
     font-size: 10pt;
   }
 
-  .calculator-section .fertility-calendar-block {
+  .result .fertility-calendar-block {
     margin: 0 0 1rem;
   }
 
-  .calculator-section .fertility-calendar-bar span {
+  .result .fertility-calendar-bar span {
     background: #ddd !important;
     border: 1px solid #999;
   }
 
-  .calculator-section .fertility-calendar-legend {
+  .result .fertility-calendar-legend {
     display: none;
   }
 
-  .calculator-section .milestones-framing {
+  .milestones {
     display: block !important;
-    margin: 0;
+    margin: 0 0 1rem;
     padding: 0;
     border: none;
   }
 
-  .calculator-section .milestones-framing h3 {
+  .milestones h3 {
     font-size: 11pt;
     font-weight: 600;
     margin: 0 0 0.5rem;
     color: #000;
   }
 
-  .calculator-section .milestone-intro {
-    display: none;
-  }
-
-  .calculator-section .milestone-list {
-    list-style: none;
+  .milestones ul {
     margin: 0;
-    padding: 0;
+    padding-left: 1.25rem;
   }
 
-  .calculator-section .milestone-list li {
-    margin-bottom: 0.75rem;
-    padding: 0;
-  }
-
-  .calculator-section .milestone-label {
-    font-weight: 600;
-    color: #000;
-  }
-
-  .calculator-section .milestone-desc {
+  .milestones li {
+    margin-bottom: 0.35rem;
     color: #333;
     font-size: 10pt;
   }

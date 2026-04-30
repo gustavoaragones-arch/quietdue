@@ -17,16 +17,12 @@ import {
 } from "/assets/js/timing-engine.js";
 
 const CONFIDENCE_DAYS = 12; /* ±12 days (within ±10–14) — reinforces uncertainty framing */
-const IMPLANTATION_START_DAYS = 21; /* approx 3 weeks from LMP */
-const IMPLANTATION_END_DAYS = 28;   /* approx 4 weeks from LMP */
-
   const form = document.getElementById("calculator-form");
   const lmpInput = document.getElementById("lmp-date");
   const submitBtn = document.getElementById("calc-submit");
   const resultsSection = document.getElementById("calc-results");
   const resultWeek = document.getElementById("result-week");
   const resultConfidence = document.getElementById("result-confidence");
-  const milestoneList = document.getElementById("milestone-list");
   const confidencePreview = document.getElementById("confidence-preview");
   const confidenceLabel = document.getElementById("confidence-label");
   const btnPrint = document.querySelector('[data-action="print"]');
@@ -62,35 +58,12 @@ const IMPLANTATION_END_DAYS = 28;   /* approx 4 weeks from LMP */
     const confidenceEarly = addDays(dueDate, -CONFIDENCE_DAYS);
     const confidenceLate = addDays(dueDate, CONFIDENCE_DAYS);
 
-    const implantationStart = addDays(lmpDate, IMPLANTATION_START_DAYS);
-    const implantationEnd = addDays(lmpDate, IMPLANTATION_END_DAYS);
-
-    const milestones = [
-      {
-        type: "implantation",
-        startDate: implantationStart,
-        endDate: implantationEnd,
-        label: "Implantation often occurs in this window. Timing can vary significantly.",
-      },
-      {
-        weekStart: 5,
-        weekEnd: 6,
-        label: "Typical first heartbeat detection window. Many providers schedule a first appointment in this range. Heartbeat is often detectable around this time.",
-      },
-      {
-        weekStart: 7,
-        weekEnd: 9,
-        label: "Many providers offer a first ultrasound in this window. Timing can vary significantly.",
-      },
-    ];
-
     return {
       dueDate,
       gestationalWeeks,
       gestationalDays,
       confidenceEarly,
       confidenceLate,
-      milestones,
     };
   }
 
@@ -115,47 +88,6 @@ const IMPLANTATION_END_DAYS = 28;   /* approx 4 weeks from LMP */
         formatDate(estimate.confidenceLate);
     }
 
-    if (milestoneList) {
-      const lmpVal = document.getElementById("lmp-date");
-      const lmpDate = lmpVal
-        ? new Date(lmpVal.value + "T12:00:00")
-        : new Date();
-      const week7Date = addDays(lmpDate, 49);
-      const week9Date = addDays(lmpDate, 63);
-
-      milestoneList.innerHTML = estimate.milestones
-        .map(function (m) {
-          if (m.type === "implantation") {
-            const range =
-              formatDate(m.startDate) + " – " + formatDate(m.endDate);
-            return (
-              "<li><span class=\"milestone-label\">Implantation window (approx 3–4 weeks from LMP): " +
-              range +
-              "</span><span class=\"milestone-desc\">" +
-              m.label +
-              "</span></li>"
-            );
-          }
-          if (m.weekStart === 5 && m.weekEnd === 6) {
-            return (
-              "<li><span class=\"milestone-label\">Weeks 5–6: typical first heartbeat detection window</span><span class=\"milestone-desc\">" +
-              m.label +
-              "</span></li>"
-            );
-          }
-          return (
-            "<li><span class=\"milestone-label\">First ultrasound window (weeks 7–9): " +
-            formatDate(week7Date) +
-            " – " +
-            formatDate(week9Date) +
-            "</span><span class=\"milestone-desc\">" +
-            m.label +
-            "</span></li>"
-          );
-        })
-        .join("");
-    }
-
     if (confidencePreview) {
       confidencePreview.removeAttribute("aria-hidden");
     }
@@ -174,12 +106,6 @@ const IMPLANTATION_END_DAYS = 28;   /* approx 4 weeks from LMP */
   function hideResults() {
     if (resultsSection) resultsSection.hidden = true;
     if (confidencePreview) confidencePreview.setAttribute("aria-hidden", "true");
-    if (milestoneList) {
-      milestoneList.innerHTML =
-        "<li><span class=\"milestone-label\">Implantation window (approx 3–4 weeks from LMP)</span><span class=\"milestone-desc\">Implantation often occurs in this window. Timing can vary significantly.</span></li>" +
-        "<li><span class=\"milestone-label\">Weeks 5–6: typical first heartbeat detection window</span><span class=\"milestone-desc\">Many providers schedule a first appointment in this range. Heartbeat is often detectable around this time.</span></li>" +
-        "<li><span class=\"milestone-label\">First ultrasound window (weeks 7–9)</span><span class=\"milestone-desc\">Many providers offer a first ultrasound in this window. Timing can vary significantly.</span></li>";
-    }
     if (confidenceLabel) confidenceLabel.textContent = "Estimated due window";
     if (btnPrint) btnPrint.disabled = true;
     if (btnIcs) btnIcs.disabled = true;

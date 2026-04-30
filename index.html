@@ -23,7 +23,7 @@
   {"@context":"https://schema.org","@type":"WebSite","name":"QuietDue","url":"https://quietdue.com/","publisher":{"@type":"Organization","name":"QuietDue","parentOrganization":{"@type":"Organization","name":"Albor Digital LLC"}}}
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is QuietDue private?","acceptedAnswer":{"@type":"Answer","text":"Yes. QuietDue runs entirely in your browser. It does not create accounts, use trackers, store your inputs, or sync to the cloud. Closing the page erases everything."}},{"@type":"Question","name":"Does this calculator save my data?","acceptedAnswer":{"@type":"Answer","text":"No. Nothing is saved. Your dates and results stay on your device and are never sent to a server."}},{"@type":"Question","name":"How accurate are early due dates?","acceptedAnswer":{"@type":"Answer","text":"Early pregnancy dating is imprecise. Cycle length and ovulation timing vary. Ultrasound may change estimates. This tool provides an approximate window, not a definitive date."}},{"@type":"Question","name":"Can I use this without creating an account?","acceptedAnswer":{"@type":"Answer","text":"Yes. No account is required. You can use the calculator immediately without signing up or logging in."}},{"@type":"Question","name":"Does QuietDue work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once the page loads, the calculator runs entirely in your browser and works without an internet connection."}},{"@type":"Question","name":"Is this medical advice?","acceptedAnswer":{"@type":"Answer","text":"No. QuietDue provides estimates for informational purposes only. It does not replace advice from a healthcare provider."}}]}
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is QuietDue private?","acceptedAnswer":{"@type":"Answer","text":"Yes. Everything runs in your browser: no accounts, trackers, or cloud sync. Closing the page erases it."}},{"@type":"Question","name":"Does this calculator save my data?","acceptedAnswer":{"@type":"Answer","text":"No. Nothing is saved or sent; dates and results stay on your device only."}},{"@type":"Question","name":"How accurate are early due dates?","acceptedAnswer":{"@type":"Answer","text":"Early dating is approximate—cycles and ovulation vary, and ultrasound can shift estimates. This tool gives a range, not a single definitive date."}},{"@type":"Question","name":"Can I use this without creating an account?","acceptedAnswer":{"@type":"Answer","text":"Yes. No sign-up; use the calculator as soon as the page loads."}},{"@type":"Question","name":"Does QuietDue work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. After the first load, the calculator works without a network connection."}},{"@type":"Question","name":"Is this medical advice?","acceptedAnswer":{"@type":"Answer","text":"No. It is informational only and does not replace a healthcare provider."}}]}
   </script>
 </head>
 <body>
@@ -48,21 +48,15 @@
   </header>
 
   <main class="page-content">
-    <!-- 1. Hero — trust-first, privacy statement -->
     <section class="hero" aria-labelledby="hero-heading">
       <h1 id="hero-heading">Quiet clarity for early pregnancy.</h1>
       <p class="hero-tagline">Understand where you are — without accounts, tracking, or stored data. No pressure. No judgment.</p>
       <p class="hero-positioning">QuietDue is a private, offline early-pregnancy calculator for people who want clarity without creating a data trail.</p>
-      <div class="hero-trust" role="complementary" aria-label="Privacy promise">
-        <p>Many pregnancy tools store your data by default. QuietDue runs entirely in your browser. Nothing is saved. Nothing is sent.</p>
-      </div>
     </section>
 
-    <!-- 2. Calculator — directly below hero for above-the-fold on mobile -->
-    <section id="calculator" class="calculator-section calculator-progressive" aria-labelledby="calc-heading">
-      <div class="calculator-card">
-      <h2 id="calc-heading">Calculator</h2>
-      <p class="calculator-intro">One step at a time. You can stop anytime. Take your time.</p>
+    <section id="calculator" class="tool-primary calculator-progressive" aria-labelledby="tool-heading">
+      <h2 id="tool-heading">Early pregnancy calculator</h2>
+      <p class="subtle">Private. No tracking. Works offline.</p>
 
       <form class="calc-form" id="calculator-form" novalidate>
         <div class="calc-step calc-step-current">
@@ -80,26 +74,16 @@
         </div>
       </form>
       <p id="date-message" class="calc-date-message" hidden aria-live="polite"></p>
+    </section>
 
-      <p class="calc-reassurance">Everything stays in your browser. Nothing is saved. You can leave anytime—closing this page erases it.</p>
-      <p class="trust-signals">Works offline. Nothing saved.</p>
-      <p class="calc-helper"><a href="/fertility-timing-guide/">Learn how fertility timing works</a></p>
-
-      <!-- Results: shown after calculation. All values in memory only. -->
-      <div class="calc-results" id="calc-results" hidden aria-live="polite">
-        <h3>Your estimate</h3>
-        <dl class="results-grid">
-          <dt>Gestational age</dt>
-          <dd class="result-week" id="result-week"></dd>
-          <dt>Estimated due window</dt>
-          <dd class="result-confidence" id="result-confidence"></dd>
-        </dl>
-        <div id="print" class="results-actions">
-          <button type="button" class="btn btn-primary" data-action="print">Print timeline</button>
-          <button type="button" class="btn btn-secondary" data-action="ics">Add to calendar</button>
-        </div>
-        <p id="action-message" class="calc-action-message" hidden aria-live="polite"></p>
-      </div>
+    <section class="result calc-results" id="calc-results" hidden aria-live="polite">
+      <h2>Your estimate</h2>
+      <dl class="results-grid">
+        <dt>Gestational age</dt>
+        <dd class="result-week" id="result-week"></dd>
+        <dt>Estimated due window</dt>
+        <dd class="result-confidence" id="result-confidence"></dd>
+      </dl>
 
       <div id="probability">
         <div class="confidence-preview" id="confidence-preview" aria-hidden="true">
@@ -110,208 +94,80 @@
           <p class="confidence-label" id="confidence-label">Estimated due window</p>
         </div>
       </div>
-      <p class="calc-helper"><a href="/fertility-timing-guide/">Read the full fertility timing guide</a></p>
 
-      <div class="confidence-block" aria-live="polite">
-        <p>Early pregnancy dates often shift after the first ultrasound.</p>
-        <p>A difference of several days is very common.</p>
+      <div id="print" class="results-actions">
+        <button type="button" class="btn btn-primary" data-action="print">Print timeline</button>
+        <button type="button" class="btn btn-secondary" data-action="ics">Add to calendar</button>
       </div>
-
-      <div class="milestones-framing" id="milestones-framing">
-        <h3>Early milestones</h3>
-        <p class="milestone-intro">Approximate windows for common reference points—not exact dates.</p>
-        <ul class="milestone-list" id="milestone-list">
-          <li>
-            <span class="milestone-label">Implantation window (approx 3–4 weeks from LMP)</span>
-            <span class="milestone-desc">Implantation often occurs in this window. Timing can vary significantly.</span>
-          </li>
-          <li>
-            <span class="milestone-label">Weeks 5–6: typical first heartbeat detection window</span>
-            <span class="milestone-desc">Many providers schedule a first appointment in this range. Heartbeat is often detectable around this time.</span>
-          </li>
-          <li>
-            <span class="milestone-label">First ultrasound window (weeks 7–9)</span>
-            <span class="milestone-desc">Many providers offer a first ultrasound in this window. Timing can vary significantly.</span>
-          </li>
-        </ul>
-      </div>
-
-      <details class="meaning-callout">
-        <summary>What this means / What it doesn&rsquo;t mean</summary>
-        <div class="meaning-callout-content">
-          <p><strong>What this means:</strong> The range reflects normal variation in cycles and ovulation. It helps you orient yourself and gives you something to work with before a first appointment.</p>
-          <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t mean anything is wrong. It&rsquo;s not a diagnosis. Your provider may use different dates after an ultrasound—that&rsquo;s normal.</p>
-        </div>
-      </details>
-      </div>
+      <p id="action-message" class="calc-action-message" hidden aria-live="polite"></p>
     </section>
 
-    <!-- 3. Explicit: what we do NOT collect -->
-    <section class="data-section" aria-labelledby="data-heading">
-      <h2 id="data-heading">What we don&rsquo;t collect</h2>
-      <p>We don&rsquo;t need anything from you to use QuietDue. Here&rsquo;s what we explicitly do not collect, store, or use:</p>
-      <ul class="data-list">
-        <li>No names, emails, or accounts</li>
-        <li>No dates you enter or results you see</li>
-        <li>No tracking, analytics, or cookies</li>
-        <li>No cloud sync or data sharing</li>
-      </ul>
-      <p class="data-closing">Everything runs in your browser. Closing this page erases everything. We believe your information about your body should stay yours until you decide otherwise.</p>
-    </section>
-
-    <!-- 3. Early pregnancy context — empathetic -->
-    <section class="context-section" aria-labelledby="context-heading">
-      <h2 id="context-heading">Early pregnancy is uncertain by nature</h2>
-      <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
-      <p>Dates shift. Cycle length and ovulation timing vary from person to person. What we call &ldquo;week 6&rdquo; today might be recalculated after more information is available. That&rsquo;s normal.</p>
-      <p>Early ultrasounds often change estimates. Measurements in the first trimester can differ from dates based on your last period—and providers may adjust your due date accordingly. It doesn&rsquo;t mean anything went wrong; it just means early pregnancy dating is imprecise.</p>
-      <p>Week numbers can feel confusing. Different sources count differently. This tool gives you a best estimate so you can orient yourself—without pretending it&rsquo;s exact.</p>
-
-      <details class="meaning-callout">
-        <summary>What this means / What it doesn&rsquo;t mean</summary>
-        <div class="meaning-callout-content">
-          <p><strong>What this means:</strong> Uncertainty is normal. Dates often get refined as more information becomes available. That&rsquo;s expected, not a sign of a problem.</p>
-          <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t mean you&rsquo;re doing something wrong or that anything is wrong with your pregnancy. It simply reflects how early dating works.</p>
-        </div>
-      </details>
-    </section>
-
-    <!-- 4. What this is / what this is not -->
-    <section class="identity-section" aria-labelledby="identity-heading">
-      <h2 id="identity-heading">What QuietDue is — and isn&rsquo;t</h2>
-      <div class="identity-grid">
-        <div>
-          <h3>Is</h3>
-          <ul>
-            <li>Private</li>
-            <li>Offline</li>
-            <li>Informational</li>
-            <li>Quiet</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Is not</h3>
-          <ul>
-            <li>A tracker</li>
-            <li>A social app</li>
-            <li>A data-collecting service</li>
-            <li>A replacement for medical care</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. Printable timeline preview (no download yet) -->
-    <section class="timeline-preview" aria-labelledby="timeline-heading">
-      <h2 id="timeline-heading">Your timeline</h2>
-      <p class="timeline-preview-intro">After you see your estimate, you&rsquo;ll be able to print a one-page timeline—or save it for offline. No account required.</p>
-      <p class="timeline-preview-badges">Printable. Offline. No account required.</p>
-
-      <div class="timeline-preview-mock" role="presentation" aria-hidden="true">
-        <div class="timeline-mock-page">
-          <div class="timeline-mock-header">Early Pregnancy Timeline</div>
-          <div class="timeline-mock-row">
-            <span class="timeline-mock-week">Week 5–6</span>
-            <span class="timeline-mock-desc">First appointment may be scheduled</span>
-          </div>
-          <div class="timeline-mock-row">
-            <span class="timeline-mock-week">Week 7–9</span>
-            <span class="timeline-mock-desc">First ultrasound often offered</span>
-          </div>
-          <div class="timeline-mock-row">
-            <span class="timeline-mock-week">Estimated due window</span>
-            <span class="timeline-mock-desc">Range shown—not a single date</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5c. Fertility timing teaser — context only, no CTA -->
-    <section class="teaser-block" aria-labelledby="teaser-heading">
-      <h2 id="teaser-heading">Understanding fertility timing before and after pregnancy</h2>
-      <p>Knowing when things happen in your cycle helps with many decisions—whether you&rsquo;re planning, avoiding, or simply curious. Fertility windows, cycle timing, and how methods align with your body&rsquo;s rhythm are part of that picture. This is educational context, not advice.</p>
-    </section>
-
-    <!-- 5d. Fertility tool preview — improves crawl depth -->
-    <section class="tool-preview" aria-labelledby="tool-preview-heading">
-      <h2 id="tool-preview-heading">Fertility Timing</h2>
-      <p>A private cycle timing overview with no tracking.</p>
-      <a href="#calculator" class="open-tool-btn">Open Tool</a>
-    </section>
-
-    <!-- 6. Disclaimer -->
-    <section class="disclaimer-section" aria-labelledby="disclaimer-heading">
-      <h2 id="disclaimer-heading">About these estimates</h2>
-      <p class="range-copy">Early pregnancy dates are usually ranges, not exact points.</p>
-      <p>This tool is for informational purposes only. It does not replace advice from a healthcare provider. Early pregnancy dating is imprecise—cycle length and ovulation vary, and ultrasound may change estimates. Whatever you&rsquo;re feeling is valid.</p>
-      <p><a href="/learn/how-early-pregnancy-dating-works/">Learn how pregnancy dating works</a></p>
-
-      <details class="meaning-callout">
-        <summary>What this means / What it doesn&rsquo;t mean</summary>
-        <div class="meaning-callout-content">
-          <p><strong>What this means:</strong> This tool offers a starting point. It can help you prepare for conversations with your provider and understand the kind of information they&rsquo;ll use.</p>
-          <p><strong>What it doesn&rsquo;t mean:</strong> It doesn&rsquo;t replace medical advice, diagnosis, or care. For questions about your pregnancy, please consult a healthcare provider.</p>
-        </div>
-      </details>
-    </section>
-
-    <!-- Related reading — fertility timing authority, centered in main column -->
-    <section class="related-reading">
-      <h2>Learn More About Fertility Timing</h2>
-      <p>Explore structured explanations about ovulation timing, cycle variability, and how fertility window estimates are calculated.</p>
+    <section class="trust" aria-labelledby="trust-heading">
+      <h3 id="trust-heading">Private by design</h3>
       <ul>
-        <li><a href="/fertility-timing-guide/stress-and-ovulation/">Does Stress Affect Ovulation Timing?</a></li>
-        <li><a href="/fertility-timing-guide/is-day-14-ovulation/">Is Ovulation Always on Day 14?</a></li>
-        <li><a href="/fertility-timing-guide/can-ovulation-change-each-month/">Can Ovulation Change Each Month?</a></li>
-        <li><a href="/fertility-timing-guide/luteal-phase-length/">What Is the Luteal Phase Length?</a></li>
-        <li><a href="/fertility-timing-guide/irregular-cycles-ovulation/">Can You Ovulate With Irregular Cycles?</a></li>
+        <li>No accounts</li>
+        <li>No tracking or analytics</li>
+        <li>No data stored or sent</li>
       </ul>
-      <p><a href="/fertility-timing-guide/">Fertility Timing Guide</a> · <a href="/#calculator">Fertility Window Calculator</a></p>
+      <p class="subtle">Everything runs in your browser. Closing this page erases everything.</p>
     </section>
 
-    <section class="guide-index">
-      <div class="guide-index-inner">
-
-        <h2>Fertility Timing Guide</h2>
-
-        <p class="guide-intro">
-          Explore explanations about ovulation timing, cycle variability, and how fertility window estimates are calculated.
-        </p>
-
-        <ul class="guide-links">
-          <li><a href="/fertility-timing-guide/">Fertility Timing Guide Overview</a></li>
-          <li><a href="/fertility-timing-guide/how-is-ovulation-calculated/">How Ovulation Is Calculated</a></li>
-          <li><a href="/fertility-timing-guide/when-is-fertile-window/">When Is the Fertile Window?</a></li>
-          <li><a href="/fertility-timing-guide/days-before-ovulation-fertile/">How Many Days Before Ovulation Are You Fertile?</a></li>
-          <li><a href="/fertility-timing-guide/can-ovulation-be-late/">Can Ovulation Be Late?</a></li>
-          <li><a href="/fertility-timing-guide/early-ovulation/">Can You Ovulate Early in Your Cycle?</a></li>
-        </ul>
-
-      </div>
+    <section class="interpretation" aria-labelledby="interpretation-heading">
+      <h3 id="interpretation-heading">What this estimate means</h3>
+      <p>Early pregnancy dates are ranges, not exact points. Cycle length and ovulation timing vary, so estimates can shift—especially after the first ultrasound.</p>
+      <p>This tool gives a clear starting point, not a definitive date.</p>
     </section>
 
-    <div class="container home-education-callout">
-      <p>
-        For structured explanations of fertility timing concepts, visit the <a href="/education/">Education section</a>.
-      </p>
+    <section class="milestones" aria-labelledby="milestones-heading">
+      <h3 id="milestones-heading">Early milestones (approximate)</h3>
+      <ul>
+        <li>Weeks 3–4: implantation window</li>
+        <li>Weeks 5–6: first heartbeat may be detectable</li>
+        <li>Weeks 7–9: first ultrasound often scheduled</li>
+      </ul>
+    </section>
+
+    <div class="secondary-collapsed" aria-label="Additional information">
+      <details class="meaning-callout">
+        <summary>How pregnancy dating works</summary>
+        <div class="meaning-callout-content">
+          <p>Dating from the first day of your last period assumes ovulation about two weeks later; real ovulation moves with cycle length. Providers often refine dates after an ultrasound.</p>
+          <p><a href="/learn/how-early-pregnancy-dating-works/">Learn how pregnancy dating works</a></p>
+        </div>
+      </details>
+      <details class="meaning-callout">
+        <summary>What this doesn&rsquo;t mean</summary>
+        <div class="meaning-callout-content">
+          <p>This is not medical advice or a diagnosis, and it does not replace your clinician. For questions about your pregnancy, speak with a healthcare provider.</p>
+        </div>
+      </details>
     </div>
 
-    <!-- 7. Static FAQ -->
+    <section class="related" aria-labelledby="related-heading">
+      <h3 id="related-heading">Learn more about fertility timing</h3>
+      <ul>
+        <li><a href="/fertility-timing-guide/irregular-cycles-ovulation/">Can you ovulate with irregular cycles?</a></li>
+        <li><a href="/fertility-timing-guide/is-day-14-ovulation/">Is ovulation always on day 14?</a></li>
+        <li><a href="/fertility-timing-guide/can-ovulation-change-each-month/">Can ovulation change each month?</a></li>
+        <li><a href="/fertility-timing-guide/luteal-phase-length/">What is the luteal phase length?</a></li>
+      </ul>
+    </section>
+
     <section class="faq-section" aria-labelledby="faq-heading">
       <h2 id="faq-heading">Frequently asked questions</h2>
       <dl class="faq-list">
         <dt>Is QuietDue private?</dt>
-        <dd>Yes. QuietDue runs entirely in your browser. It does not create accounts, use trackers, store your inputs, or sync to the cloud. Closing the page erases everything.</dd>
+        <dd>Yes. Everything runs in your browser—no accounts, trackers, or cloud sync. Closing the page erases it.</dd>
         <dt>Does this calculator save my data?</dt>
-        <dd>No. Nothing is saved. Your dates and results stay on your device and are never sent to a server.</dd>
+        <dd>No. Nothing is saved or sent; your dates and results stay on your device only.</dd>
         <dt>How accurate are early due dates?</dt>
-        <dd>Early pregnancy dating is imprecise. Cycle length and ovulation timing vary. Ultrasound may change estimates. This tool provides an approximate window, not a definitive date.</dd>
+        <dd>Early dating is approximate: cycles and ovulation vary, and ultrasound can shift estimates. You get a range, not a single definitive date.</dd>
         <dt>Can I use this without creating an account?</dt>
-        <dd>Yes. No account is required. You can use the calculator immediately without signing up or logging in.</dd>
+        <dd>Yes. No sign-up is required.</dd>
         <dt>Does QuietDue work offline?</dt>
-        <dd>Yes. Once the page loads, the calculator runs entirely in your browser and works without an internet connection.</dd>
+        <dd>Yes. After the first load, the calculator works without a network connection.</dd>
         <dt>Is this medical advice?</dt>
-        <dd>No. QuietDue provides estimates for informational purposes only. It does not replace advice from a healthcare provider.</dd>
+        <dd>No. It is informational only and does not replace a healthcare provider.</dd>
       </dl>
     </section>
   </main>

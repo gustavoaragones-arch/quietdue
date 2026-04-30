@@ -679,7 +679,7 @@ header {
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-lg);
 }
-.page-content > .hero + .calculator-section {
+.page-content > .hero + .tool-primary {
   margin-top: 0;
 }
 
@@ -721,6 +721,128 @@ header {
   font-size: 0.9375rem;
   color: var(--color-text-secondary);
   line-height: var(--line-height-body);
+}
+
+/* Homepage — trust, interpretation, compact milestones, related (single column) */
+.trust,
+.interpretation {
+  max-width: var(--max-width-wide);
+  margin: 0 auto var(--section-gap);
+  padding: var(--space-xl) 24px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-subtle);
+}
+
+.trust h3,
+.interpretation h3 {
+  margin: 0 0 var(--space-md);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.trust ul {
+  margin: 0 0 var(--space-md);
+  padding-left: 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.trust li {
+  margin-bottom: var(--space-xs);
+}
+
+.trust .subtle,
+.interpretation p {
+  margin: 0 0 var(--space-sm);
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.trust .subtle {
+  margin-bottom: 0;
+}
+
+.interpretation p:last-child {
+  margin-bottom: 0;
+}
+
+.milestones {
+  max-width: var(--max-width-wide);
+  margin: 0 auto var(--section-gap);
+  padding: 0 4px;
+}
+
+.milestones h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.milestones ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-loose);
+}
+
+.milestones li {
+  margin-bottom: var(--space-xs);
+}
+
+.secondary-collapsed {
+  max-width: var(--max-width-wide);
+  margin: 0 auto var(--section-gap);
+}
+
+.secondary-collapsed .meaning-callout:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.related {
+  max-width: var(--max-width-wide);
+  margin: 0 auto var(--section-gap);
+  padding: var(--space-xl) 24px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+
+.related h3 {
+  margin: 0 0 var(--space-md);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.related ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.related li {
+  margin-bottom: var(--space-sm);
+}
+
+.related a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.related a:hover {
+  color: var(--text-secondary);
+}
+
+.related a:visited {
+  color: var(--text-primary);
 }
 
 /* Data section — explicit what we don't collect */
@@ -870,10 +992,27 @@ main.guide-page {
 }
 
 /* Calculator results — shown after submission, in memory only. Smooth reveal, no scroll jump. */
+section.result.calc-results,
 .calc-results {
+  max-width: var(--max-width-wide);
+  margin-left: auto;
+  margin-right: auto;
   margin-top: var(--space-2xl);
-  padding-top: var(--space-xl);
-  border-top: 1px solid var(--border-soft);
+  padding: var(--space-xl) 28px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+
+section.result.calc-results {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--section-gap);
+  border-top: none;
+}
+
+section.result.calc-results .confidence-preview {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
 }
 
 .calc-results:not([hidden]) {
@@ -889,9 +1028,10 @@ main.guide-page {
   }
 }
 
+.calc-results h2,
 .calc-results h3 {
   margin: 0 0 var(--space-md);
-  font-size: 0.9375rem;
+  font-size: 1.125rem;
   font-weight: var(--font-weight-medium);
   color: var(--color-text);
 }
@@ -1073,6 +1213,27 @@ label {
   border-radius: 0;
 }
 
+/* Homepage — primary tool card directly under hero */
+.tool-primary {
+  max-width: var(--max-width-wide);
+  margin: 0 auto var(--section-gap);
+  padding: 28px 24px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+
+.tool-primary .subtle {
+  margin: 0 0 20px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.tool-primary .calc-form {
+  margin-top: 0;
+}
+
 /* === CALCULATOR CARD === */
 .calculator-card {
   background: var(--bg-soft);
@@ -1099,7 +1260,8 @@ label {
 }
 
 .calculator-progressive h2,
-.calculator-card h2 {
+.calculator-card h2,
+.tool-primary h2 {
   margin: 0 0 8px;
   font-size: 20px;
   font-weight: 500;
