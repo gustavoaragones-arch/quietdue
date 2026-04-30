@@ -91,6 +91,8 @@ html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: auto;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* === TYPOGRAPHY SYSTEM === */
@@ -104,6 +106,8 @@ body {
   background-color: var(--color-bg);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 p {
@@ -223,11 +227,15 @@ header {
   margin: 0 auto;
 }
 
+/* Full-bleed bar without huge negative inset (avoids horizontal document overflow) */
 .page-header::before {
   content: "";
   position: absolute;
-  inset: 0 -9999px;
+  top: 0;
   bottom: -1px;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   z-index: -1;
@@ -2392,8 +2400,11 @@ footer {
 footer::before {
   content: "";
   position: absolute;
-  inset: 0 -9999px;
   top: -1px;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
   background-color: var(--color-surface);
   border-top: 1px solid var(--color-divider);
   z-index: -1;
