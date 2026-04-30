@@ -723,10 +723,10 @@ header {
   line-height: var(--line-height-body);
 }
 
-/* Homepage — trust, interpretation, compact milestones, related (single column) */
+/* Homepage — trust, interpretation, milestones, related (reading width like former data/context blocks) */
 .trust,
 .interpretation {
-  max-width: var(--max-width-wide);
+  max-width: var(--max-width-reading);
   margin: 0 auto var(--section-gap);
   padding: var(--space-xl) 24px;
   background-color: var(--color-surface);
@@ -771,7 +771,7 @@ header {
 }
 
 .milestones {
-  max-width: var(--max-width-wide);
+  max-width: var(--max-width-reading);
   margin: 0 auto var(--section-gap);
   padding: 0 4px;
 }
@@ -796,7 +796,7 @@ header {
 }
 
 .secondary-collapsed {
-  max-width: var(--max-width-wide);
+  max-width: var(--max-width-reading);
   margin: 0 auto var(--section-gap);
 }
 
@@ -807,7 +807,7 @@ header {
 }
 
 .related {
-  max-width: var(--max-width-wide);
+  max-width: var(--max-width-reading);
   margin: 0 auto var(--section-gap);
   padding: var(--space-xl) 24px;
   background: var(--bg-soft);
@@ -973,11 +973,16 @@ header {
   line-height: var(--line-height-body);
 }
 
-/* Main — full-width wrapper, centered sections with adaptive max-width */
-.page-content,
+/* Main — centered column; homepage (.page-content) matches header max width */
 main {
   margin: 0 auto;
   padding: 0 var(--space-lg) var(--space-3xl);
+}
+
+.page-content {
+  max-width: var(--max-width-wide);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Fallback for pages without .page-content (about, learn, etc.) */
@@ -2329,6 +2334,10 @@ a.open-tool-btn:hover {
   margin: 0 auto var(--section-gap);
   padding: 20px;
   box-shadow: none;
+}
+
+.page-content .faq-section {
+  max-width: var(--max-width-reading);
 }
 
 .faq-section h2 {
